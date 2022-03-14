@@ -1,9 +1,8 @@
 //import {Menu, Segment} from "semantic-ui-react";
+import { useState } from "react";
 import { createMedia } from "@artsy/fresnel";
 import React from "react";
-import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
-
-
+import { Icon, Image, Menu, Sidebar } from "semantic-ui-react";
 
     const AppMedia = createMedia({
         breakpoints: {
@@ -16,6 +15,11 @@ import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
     });
 
     const { Media, MediaContextProvider } = AppMedia;
+    console.log("Media",Media);
+    console.log("MediaContextProvider",MediaContextProvider);
+    console.log("AppMedia",AppMedia);
+
+    
 
     const NavBarMobile = (props) => {
         const {
@@ -85,31 +89,21 @@ import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
         );
     };
 
+function NavBar({leftItems, rightItems }){
+    const [visible, setVisible] = useState(false)
 
-    class NavBar extends React.Component {
-        state = {
-            visible: false
-        };
-
-        handlePusher = () => {
-            const { visible } = this.state;
-
-            if (visible) this.setState({ visible: false });
-        };
-
-        handleToggle = () => this.setState({ visible: !this.state.visible });
-
-        render() {
-            const { leftItems, rightItems } = this.props;
-            const { visible } = this.state;
-
+    const handlePusher = () => {
+        if (visible) setVisible(false);
+    }
+   const handleToggle = () =>  setVisible(!visible);
+    
             return (
                 <div>
                     <Media at="mobile">
                         <NavBarMobile
                             leftItems={leftItems}
-                            onPusherClick={this.handlePusher}
-                            onToggle={this.handleToggle}
+                            onPusherClick={handlePusher}
+                            onToggle={handleToggle}
                             rightItems={rightItems}
                             visible={visible}
                         >
@@ -122,11 +116,13 @@ import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
                 </div>
             );
         }
-    }
+    // }
+
 
     const leftItems = [
         { as: "a", content: "Home", key: "home" },
-        { as: "a", content: "Users", key: "users" }
+        { as: "a", content: "Products", key: "users" },
+        { as: "a", content: "Reviews", key: "users" }
     ];
     const rightItems = [
         { as: "a", content: "Login", key: "login" },
@@ -138,7 +134,7 @@ function Header(){
 
             <MediaContextProvider>
                 <NavBar leftItems={leftItems} rightItems={rightItems}>
-                    <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
+                    
                 </NavBar>
             </MediaContextProvider>
 
