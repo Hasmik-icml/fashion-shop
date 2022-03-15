@@ -1,9 +1,15 @@
-import Cards from "../card/CardItem";
+import Cards from "../card/Cards";
+import Slide from "../Slide/Slide"
+import slidesData from "../../Services/slideData";
+import "../home/home.css"
 
 function Home(){
 
     return (
-        <Cards/>
+       <div className="home ui container">
+            <Slide slides={slidesData()}/>
+            <Cards />
+       </div>
     )
 }
 export default Home;

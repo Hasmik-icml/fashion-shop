@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { createMedia } from "@artsy/fresnel";
 import React from "react";
-import { Icon, Image, Menu, Sidebar } from "semantic-ui-react";
+import { Outlet, Link } from "react-router-dom";
+import { Icon, Image, Menu, Sidebar }  from "semantic-ui-react";
 
     const AppMedia = createMedia({
         breakpoints: {
@@ -71,7 +72,8 @@ import { Icon, Image, Menu, Sidebar } from "semantic-ui-react";
         const { leftItems, rightItems } = props;
 
         return (
-            <Menu fixed="top" inverted>
+            
+            <Menu fixed="top" inverted >
                 <Menu.Item>
                     <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
                 </Menu.Item>
@@ -98,7 +100,7 @@ function NavBar({leftItems, rightItems }){
    const handleToggle = () =>  setVisible(!visible);
     
             return (
-                <div>
+             <>
                     <Media at="mobile">
                         <NavBarMobile
                             leftItems={leftItems}
@@ -113,16 +115,16 @@ function NavBar({leftItems, rightItems }){
                     <Media greaterThan="mobile">
                         <NavBarDesktop leftItems={leftItems} rightItems={rightItems} />
                     </Media>
-                </div>
+                    </>
             );
-        }
+        };
     // }
 
 
     const leftItems = [
-        { as: "a", content: "Home", key: "home" },
-        { as: "a", content: "Products", key: "users" },
-        { as: "a", content: "Reviews", key: "users" }
+        { as: Link, to:"/", content: "Home", key: "home" },
+        { as: Link, to:"/Products", content: "Products", key: "users" },
+        { as: Link, to:"/Reviews", content: "Reviews", key: "users" }
     ];
     const rightItems = [
         { as: "a", content: "Login", key: "login" },
