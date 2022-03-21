@@ -158,11 +158,11 @@ function Header(){
         rightItems.push({
             children: [
               <Image avatar spaced="right" src={user.picture} />,
-              <Dropdown pointing="top left" text="Username">
-                <Dropdown.Menu>
-                  <Dropdown.Item text={user.name}/>
-                  <Dropdown.Item as={Link} text="Dashboard" />
-                  <Dropdown.Item onClick={logout} text="Sign out" icon="power" />
+              <Dropdown pointing="top left" text="Username" key="userDropdown">
+                <Dropdown.Menu key="userDropdownMenu">
+                  <Dropdown.Item text={user.name} key={user.name} />
+                  <Dropdown.Item as={Link} to="/dashboard" text="Dashboard" key="userDashboard" />
+                  <Dropdown.Item onClick={logout} text="Sign out" icon="power" key="userSignout"/>
                 </Dropdown.Menu>
               </Dropdown>
             ],
