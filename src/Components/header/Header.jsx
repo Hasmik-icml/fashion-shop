@@ -3,7 +3,8 @@ import { useState } from "react";
 import { createMedia } from "@artsy/fresnel";
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
-import { Icon, Image, Menu, Sidebar }  from "semantic-ui-react";
+import { Icon, Image, Menu, Sidebar, Dropdown }  from "semantic-ui-react";
+import { useAuth0 } from "@auth0/auth0-react";
 
     const AppMedia = createMedia({
         breakpoints: {
@@ -56,11 +57,18 @@ import { Icon, Image, Menu, Sidebar }  from "semantic-ui-react";
                         <Menu.Item onClick={onToggle}>
                             <Icon name="sidebar" />
                         </Menu.Item>
-                        <Menu.Menu position="right">
-                            {rightItems.map((item) => (
-                                <Menu.Item {...item} />
-                            ))}
+                        
+                        <Menu.Menu position="right" key="rightItems">
+                            {rightItems.map((item, index) => {
+                            if (item.children) {
+                                return (
+                                <Menu.Item key={`rightParams${index}`}>{item.children}</Menu.Item>
+                                );
+                            }
+                            return <Menu.Item key={index} {...item.link} />;
+                            })}
                         </Menu.Menu>
+
                     </Menu>
                     {children}
                 </Sidebar.Pusher>
@@ -72,7 +80,7 @@ import { Icon, Image, Menu, Sidebar }  from "semantic-ui-react";
         const { leftItems, rightItems } = props;
 
         return (
-            
+            <>
             <Menu fixed="top" inverted >
                 <Menu.Item>
                     <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
@@ -81,17 +89,23 @@ import { Icon, Image, Menu, Sidebar }  from "semantic-ui-react";
                 {leftItems.map((item) => (
                     <Menu.Item {...item} />
                 ))}
-
-                <Menu.Menu position="right">
-                    {rightItems.map((item) => (
-                        <Menu.Item {...item} />
-                    ))}
-                </Menu.Menu>
+             <Menu.Menu position="right" key="rightItems">
+                {rightItems.map((item, index) => {
+                if (item.children) {
+                    return (
+                    <Menu.Item key={`rightParams${index}`}>{item.children}</Menu.Item>
+                    );
+                }
+                return <Menu.Item key={index} {...item.link} />;
+                })}
+            </Menu.Menu>
             </Menu>
+            </>
         );
     };
 
 function NavBar({leftItems, rightItems }){
+    
     const [visible, setVisible] = useState(false)
 
     const handlePusher = () => {
@@ -100,7 +114,7 @@ function NavBar({leftItems, rightItems }){
    const handleToggle = () =>  setVisible(!visible);
     
             return (
-             <>
+                    <>
                     <Media at="mobile">
                         <NavBarMobile
                             leftItems={leftItems}
@@ -126,12 +140,41 @@ function NavBar({leftItems, rightItems }){
         { as: Link, to:"/Products", content: "Products", key: "users" },
         { as: Link, to:"/Reviews", content: "Reviews", key: "users" }
     ];
+
+
     const rightItems = [
-        { as: "a", content: "Login", key: "login" },
-        { as: "a", content: "Register", key: "register" }
+        { as: Link, to:"/login", content: "Login", key: "login" },
+        // { as: Link, to:"/register", content: "Register", key: "register" }
     ];
 
+  
+
 function Header(){
+    const {user, isAuthenticated, logout} = useAuth0()
+    rightItems.length = 0;
+    if(isAuthenticated){
+        console.log(user);
+
+        rightItems.push({
+            children: [
+              <Image avatar spaced="right" src={user.picture} />,
+              <Dropdown pointing="top left" text="Username">
+                <Dropdown.Menu>
+                  <Dropdown.Item text={user.name}/>
+                  <Dropdown.Item as={Link} text="Dashboard" />
+                  <Dropdown.Item onClick={logout} text="Sign out" icon="power" />
+                </Dropdown.Menu>
+              </Dropdown>
+            ],
+          });
+        
+            //  rightItems.push( `<div>user.name</div>, <button onClick={()=> logout()}>Logout</button>`);
+         } else {
+            //   rightItems.push({ as: Link, to:"/login", content: "Login", key: "login" });
+              rightItems.push({
+                link: { as: Link, to: "/login", content: "Login", key: "login" },
+              });
+         }
     return(
 
             <MediaContextProvider>

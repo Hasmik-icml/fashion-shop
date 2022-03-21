@@ -3,6 +3,10 @@ import Slide from "../Slide/Slide"
 import slidesData from "../../Services/slideData";
 import "../home/home.css"
 
+
+
+
+
 function Home(){
 
     return (
