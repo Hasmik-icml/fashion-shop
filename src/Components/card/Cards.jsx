@@ -7,13 +7,13 @@ const Cards = () => {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    getProducts().then((param) => {
+    getData().then((param) => {
       setResult(param);
     });
   }, []);
 
   return (
-    <div class="ui stackable three column grid">
+    <div className="ui stackable three column grid">
       {result.map((item) => {
         return (
           <CardItem

@@ -17,11 +17,6 @@ import { useAuth0 } from "@auth0/auth0-react";
     });
 
     const { Media, MediaContextProvider } = AppMedia;
-    console.log("Media",Media);
-    console.log("MediaContextProvider",MediaContextProvider);
-    console.log("AppMedia",AppMedia);
-
-    
 
     const NavBarMobile = (props) => {
         const {
@@ -52,7 +47,7 @@ import { useAuth0 } from "@auth0/auth0-react";
                 >
                     <Menu fixed="top" inverted>
                         <Menu.Item>
-                            <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+                            <Image size="mini" src="../logo.jpg" />
                         </Menu.Item>
                         <Menu.Item onClick={onToggle}>
                             <Icon name="sidebar" />
@@ -83,7 +78,7 @@ import { useAuth0 } from "@auth0/auth0-react";
             <>
             <Menu fixed="top" inverted >
                 <Menu.Item>
-                    <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+                    <Image size="mini" src="../logo.jpg" />
                 </Menu.Item>
 
                 {leftItems.map((item) => (
@@ -137,8 +132,8 @@ function NavBar({leftItems, rightItems }){
 
     const leftItems = [
         { as: Link, to:"/", content: "Home", key: "home" },
-        { as: Link, to:"/Products", content: "Products", key: "users" },
-        { as: Link, to:"/Reviews", content: "Reviews", key: "users" }
+        { as: Link, to:"/Products", content: "Products", key: "products" },
+        { as: Link, to:"/Reviews", content: "Reviews", key: "reviews" }
     ];
 
 
@@ -157,7 +152,7 @@ function Header(){
 
         rightItems.push({
             children: [
-              <Image avatar spaced="right" src={user.picture} />,
+              <Image avatar spaced="right" src={user.picture} key="image"/>,
               <Dropdown pointing="top left" text="Username" key="userDropdown">
                 <Dropdown.Menu key="userDropdownMenu">
                   <Dropdown.Item text={user.name} key={user.name} />

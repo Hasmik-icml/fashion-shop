@@ -1,4 +1,7 @@
 .home{
     margin: 15vh 2vh 0 0;
     padding: 2vh;
+ 
+        min-height: calc(100vh - 50px);
+      
 }

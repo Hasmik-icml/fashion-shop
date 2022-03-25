@@ -7,7 +7,7 @@ import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import Products from "./Components/products/products.jsx";
 import { Route, BrowserRouter, Routes} from "react-router-dom";
 import LoginPage from "./Components/Login/Loginbutton.jsx";
-
+import { Parent } from "./Components/UseContext.jsx";
 
 function App() {
   return (
@@ -24,6 +24,10 @@ function App() {
      <Footer />
     </div>
     </BrowserRouter>
+    // <div>
+    //   <h1>Hello</h1>
+    //   <Parent/>
+    // </div>
   );
 }
 
