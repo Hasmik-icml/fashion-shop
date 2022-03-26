@@ -3,6 +3,7 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 
 function CardItem({description, image, name, price}){
+
     return (
         <Card centered>
           <Image src={image} wrapped ui={false} />

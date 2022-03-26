@@ -18,7 +18,7 @@ img {
 }
 .slideImg{
 	/* width: 100%; */
-	position: relative;;
+	position: relative;
 }
 
 .slideImg img{
@@ -28,18 +28,20 @@ img {
     width: 100%;
 }
 
+
 .ui.button{
 	background: none;
 	z-index: 100;
 	position: absolute;
 	transform: translateY(-50%);
 	top: 50%;
-	color: blueviolet;
+	color: rgb(255, 255, 255);
 	transition:0.5s ease;
+    
 }
 
 .ui.button:hover{
-	color: blue;
+	color: rgb(131, 131, 131);
 }
 
 .left{

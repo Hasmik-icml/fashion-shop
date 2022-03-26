@@ -11,9 +11,18 @@ export async function getData(){
 }
 
 export async function getProducts(){
-    const response = await fetch(`${apiURL}product`)
-    const data = await response.json();
-    return data;
+    try{
+        const response = await fetch(`${apiURL}product/get-all`)
+        console.log("productData", response)
+        const data = await response.json();
+        console.log("productData", data)
+        return data;
+    }catch(error){
+        console.log("wrong", error);
+    }
+   
+    
+    
 }
 
 export async function getOrders(user_id, token){

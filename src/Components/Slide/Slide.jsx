@@ -5,6 +5,8 @@ import {Button, Icon} from "semantic-ui-react";
 function Slides({ slides }) {
 
   let [index, setIndex] = useState(0);
+  // let encodeed = slides[0].image;
+  // console.log("encodeed", encodeed)
 
   function showPrev(){
 
@@ -32,18 +34,20 @@ function Slides({ slides }) {
       {/* <div id="navigation" className="text-center"> */}
         <div id="slide" className="card text-center">
           <div className="slideImg"><img src={slides[index].image} data-testid="title"/>
-              <button data-testid="button-prev" className="small" onClick={()=>{
+
+          </div>
+             <Button data-testid="button-prev" className="small left" onClick={()=>{
                 showPrev()
               }}>
-              {/* <Icon name = "chevron left" /> */}
-              </button>
+              <Icon name = "angle left" size='huge' />
+              </Button>
 
-              <button data-testid="button-next" className="small" onClick={()=>{
+              <Button data-testid="button-next" className="small right" onClick={()=>{
                 showNext()
               }}>
-              {/* <Icon name = "chevron right" /> */}
-              </button>
-          </div>
+              <Icon name = "angle right" size='huge'/>
+              
+              </Button>
       </div>
        
         {/* <p data-testid="text">Slide Text Here</p> */}
