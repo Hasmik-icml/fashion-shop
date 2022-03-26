@@ -20,9 +20,9 @@ const Cards = () => {
         return (
           
           <CardItem
-            key={item._id}
-            description={item.description}
-            image={item.image}
+            key={item.id}
+            descriptions={item.descriptions}
+            img={item.img}
             name={item.name}
             price={item.price}
           />

@@ -12,7 +12,7 @@ function Dashboard() {
 
 
     async function uploadImage(e){
-     
+    //  console.log(e.target.files[0])
       const file = e.target.files[0];
       console.log("file", file);
       const base64 = await convertBase64(file);
@@ -21,7 +21,7 @@ function Dashboard() {
      
     }
     console.log("baseImage", baseImage);
-    
+
     function convertBase64(file){
       return new Promise((resolve, reject)=>{
         const fileReader = new FileReader();
@@ -66,7 +66,7 @@ function Dashboard() {
         uploadImage(e)
       }}/>
       {baseImage.map((item) =>{
-        return  <img src={item} height="200px" />;
+        return  <img key ={item} src={item} height="200px" />;
       })}
     </div>
   )
