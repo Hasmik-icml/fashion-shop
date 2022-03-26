@@ -1,4 +1,4 @@
-//import {Menu, Segment} from "semantic-ui-react";
+import "./header.css"
 import { useState } from "react";
 import { createMedia } from "@artsy/fresnel";
 import React from "react";
@@ -43,7 +43,7 @@ import { useAuth0 } from "@auth0/auth0-react";
                 <Sidebar.Pusher
                     dimmed={visible}
                     onClick={onPusherClick}
-                    style={{ minHeight: "100vh" }}
+                    // style={{ minHeight: "100vh" }}
                 >
                     <Menu fixed="top" inverted>
                         <Menu.Item>
@@ -109,7 +109,7 @@ function NavBar({leftItems, rightItems }){
    const handleToggle = () =>  setVisible(!visible);
     
             return (
-                    <>
+                    <div className="customHeader">
                     <Media at="mobile">
                         <NavBarMobile
                             leftItems={leftItems}
@@ -124,7 +124,7 @@ function NavBar({leftItems, rightItems }){
                     <Media greaterThan="mobile">
                         <NavBarDesktop leftItems={leftItems} rightItems={rightItems} />
                     </Media>
-                    </>
+                    </div>
             );
         };
     // }

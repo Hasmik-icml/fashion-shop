@@ -5,7 +5,7 @@ import "../home/home.css"
 
 function Home(){
     return (
-       <div className="home ui container">
+       <div className="home main ui container">
             <Slide slides={slidesData()}/>
             <Cards />
        </div>

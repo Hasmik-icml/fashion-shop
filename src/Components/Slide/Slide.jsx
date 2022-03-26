@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "./slide.css";
+import {Button, Icon} from "semantic-ui-react";
 
 function Slides({ slides }) {
 
@@ -27,28 +29,26 @@ function Slides({ slides }) {
 
   return (
     <div>
-      <div id="navigation" className="text-center">
-        <button data-testid="button-restart" className="small outlined" onClick={()=>{
-            restart()
-        }}>
-          Restart
-        </button>
-        <button data-testid="button-prev" className="small" onClick={()=>{
-          showPrev()
-        }}>
-          Prev
-        </button>
-        <button data-testid="button-next" className="small" onClick={()=>{
-          showNext()
-        }}>
-          Next
-        </button>
+      {/* <div id="navigation" className="text-center"> */}
+        <div id="slide" className="card text-center">
+          <div className="slideImg"><img src={slides[index].image} data-testid="title"/>
+              <button data-testid="button-prev" className="small" onClick={()=>{
+                showPrev()
+              }}>
+              {/* <Icon name = "chevron left" /> */}
+              </button>
+
+              <button data-testid="button-next" className="small" onClick={()=>{
+                showNext()
+              }}>
+              {/* <Icon name = "chevron right" /> */}
+              </button>
+          </div>
       </div>
-      <div id="slide" className="card text-center">
-        <img src={slides[index].image} data-testid="title"/>
+       
         {/* <p data-testid="text">Slide Text Here</p> */}
       </div>
-    </div>
+    // </div>
   );
 }
 
