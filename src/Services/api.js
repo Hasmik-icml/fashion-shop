@@ -42,7 +42,7 @@ export async function getOrders(user_id, token){
 }
 
 export async function authoriseUser(user, token){
-    const {sub:id, name, email, picture} =user;
+    const {sub:id, name, email, picture} = user;
     try{
         const response = await fetch(`${apiURL}login/signup`,{
             method: "POST",
