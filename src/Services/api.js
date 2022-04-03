@@ -1,14 +1,11 @@
 
 import { apiURL } from "../config";
 
-
-
-
-export async function getData(){
-    const response=await fetch("https://baby-island.herokuapp.com/homeproduct");
-    const data=await response.json();
-    return data;
-}
+// export async function getData(){
+//     const response=await fetch("https://baby-island.herokuapp.com/homeproduct");
+//     const data=await response.json();
+//     return data;
+// }
 
 export async function getProducts(){
     try{
@@ -20,9 +17,6 @@ export async function getProducts(){
     }catch(error){
         console.log("wrong", error);
     }
-   
-    
-    
 }
 
 export async function getOrders(user_id, token){
@@ -63,3 +57,33 @@ export async function authoriseUser(user, token){
         console.log("wrong post", error);
     }
 }
+export async function confirmOrder(user, product, token, option) {
+    const { sub: id, name, email, picture } = user;
+    const {address,paymentMethod,phone} = option;
+  
+    const body = {
+        date:new Date().valueOf(),
+      user: user,
+      product: product,
+      count: 1,
+      
+      orderStatus:paymentMethod==="cash" ? "UNPAID" : "PAID",
+      address:address,
+      phone:phone,
+  
+    };
+    try {
+      const response = await fetch(`${apiURL}order`, {
+        method: "POST",      
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json;charset=utf-8",
+          user_id: user,
+        },
+        body: JSON.stringify(body),
+      });
+      return response.json();
+    } catch (error) {
+      console.log("sxalPost", error);
+    }
+  }

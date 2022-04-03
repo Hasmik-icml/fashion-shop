@@ -1,31 +1,32 @@
 
+import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
 import { Button, Card, Icon, Image } from 'semantic-ui-react'
+import BuyProduct from '../buyProduct/BuyProduct';
+import { Link } from 'react-router-dom';
 
-
-function CardItem({description, img, name, price}){
+function CardItem({description, img, name, price, item}){
+  const {isAuthenticated, user} = useAuth0;
  
     return (
         <Card centered>
-         <img src={""} height="200px" />
-          {/* <Image src={""+img} height="200px" /> */}
+         <Image src={img} height="200px" />
           <Card.Content>
             <Card.Header>{name}</Card.Header>
             <Card.Description>
-              {description.comment}
+              {description}
             </Card.Description>
           </Card.Content>
 
           <Card.Content extra>
           {price}
-            {/* <a>
-              <Icon name='user' />
-              22 Friends
-            </a> */}
-          </Card.Content>
-          {/* <Card.Content extra>
-          <Button>BUY</Button>
-          </Card.Content> */}
+          {isAuthenticated ? (<BuyProduct item={item} productInfo={{description,img,name,price}}/>
+          ): (
+            <Button as={Link} to="/login" color="green" inverted floated="right">
+            BUY
+          </Button>
+          )}
+         </Card.Content>
         </Card>
       )
 }

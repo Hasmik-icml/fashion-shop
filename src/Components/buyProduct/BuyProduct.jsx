@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, Form, Header, Image, Modal, Segment } from "semantic-ui-react";
-import BuyForm from "./buyForm";
+import BuyForm from "./ByForm";
 import "./BuyProduct.css";
-import { confirmOrder } from "../../services/api";
+import { confirmOrder } from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function BuyProduct({ productInfo, item }) {
