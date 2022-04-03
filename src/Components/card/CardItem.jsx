@@ -1,4 +1,4 @@
-import "./cardItem.css"
+import "./cardItem.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { Button, Card, Icon, Image } from "semantic-ui-react";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function CardItem({ description, img, name, price, item }) {
   const { isAuthenticated, user } = useAuth0;
-  
+
   return (
     <Card centered>
       <Image src={img} height="200px" />
@@ -17,8 +17,7 @@ function CardItem({ description, img, name, price, item }) {
       </Card.Content>
 
       <Card.Content>
-    <div>
-    {price}
+        {price}
         {isAuthenticated ? (
           <BuyProduct
             item={item}
@@ -29,10 +28,7 @@ function CardItem({ description, img, name, price, item }) {
             BUY
           </button>
         )}
-    </div>
       </Card.Content>
-      
-
     </Card>
   );
 }
