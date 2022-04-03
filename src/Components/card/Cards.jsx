@@ -21,7 +21,7 @@ const Cards = () => {
           
           <CardItem
             key={item.id}
-            descriptions={item.descriptions}
+            description={item.description}
             img={item.img}
             name={item.name}
             price={item.price}
