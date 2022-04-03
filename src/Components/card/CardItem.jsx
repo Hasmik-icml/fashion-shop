@@ -1,23 +1,21 @@
 
 import { useState } from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Button, Card, Icon, Image } from 'semantic-ui-react'
 
 
-function CardItem({descriptions, img, name, price}){
-  const [images, setImages] = useState([])
-
-  const file = JSON.parse(img[0].imagePath)
+function CardItem({description, img, name, price}){
  
     return (
         <Card centered>
-         <img src={file} height="200px" />
+         <img src={""} height="200px" />
           {/* <Image src={""+img} height="200px" /> */}
           <Card.Content>
             <Card.Header>{name}</Card.Header>
             <Card.Description>
-              {descriptions.comment}
+              {description.comment}
             </Card.Description>
           </Card.Content>
+
           <Card.Content extra>
           {price}
             {/* <a>
@@ -25,6 +23,9 @@ function CardItem({descriptions, img, name, price}){
               22 Friends
             </a> */}
           </Card.Content>
+          {/* <Card.Content extra>
+          <Button>BUY</Button>
+          </Card.Content> */}
         </Card>
       )
 }

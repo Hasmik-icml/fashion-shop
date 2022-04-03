@@ -47,7 +47,7 @@ import { useAuth0 } from "@auth0/auth0-react";
                 >
                     <Menu fixed="top" inverted>
                         <Menu.Item>
-                            <Image size="mini" src="../logo.jpg" />
+                            <Image size="mini" src="./clothes-hanger.png" />
                         </Menu.Item>
                         <Menu.Item onClick={onToggle}>
                             <Icon name="sidebar" />
@@ -78,7 +78,7 @@ import { useAuth0 } from "@auth0/auth0-react";
             <>
             <Menu fixed="top" inverted >
                 <Menu.Item>
-                    <Image size="mini" src="../logo.jpg" />
+                    <Image size="mini" src="./clothes-hanger.png" />
                 </Menu.Item>
 
                 {leftItems.map((item) => (

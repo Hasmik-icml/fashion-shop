@@ -9,7 +9,7 @@ function Dashboard() {
     useAuth0();
 
   const [baseImage, setBaseIamge] = useState([]);
-
+  console.log("baseImage", baseImage);
   async function uploadImage(e) {
     //  console.log(e.target.files[0])
     const file = e.target.files[0];
@@ -18,7 +18,7 @@ function Dashboard() {
 
     setBaseIamge([...baseImage, base64]);
   }
-  // console.log("baseImage", baseImage);
+  console.log("baseImage", baseImage);
 
   function convertBase64(file) {
     return new Promise((resolve, reject) => {
@@ -27,6 +27,7 @@ function Dashboard() {
       // console.log("fileReader.readAsDataURL",fileReader.readAsDataURL(file));
 
       fileReader.onload = () => {
+        // console.log(fileReader.result)
         resolve(fileReader.result);
       };
 
