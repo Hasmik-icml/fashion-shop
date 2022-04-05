@@ -29,7 +29,7 @@ img {
 }
 
 
-.small{
+#slide .ui.button{
 	background: none;
 	z-index: 100;
 	position: absolute;
