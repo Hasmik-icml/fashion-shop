@@ -5,6 +5,7 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { Icon, Image, Menu, Sidebar, Dropdown }  from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
+import logo from "../../clothes-hanger.png";
 
     const AppMedia = createMedia({
         breakpoints: {
@@ -47,7 +48,7 @@ import { useAuth0 } from "@auth0/auth0-react";
                 >
                     <Menu fixed="top" inverted>
                         <Menu.Item>
-                            <Image size="mini" src="./clothes-hanger.png" />
+                            <Image size="mini" src={logo}/>
                         </Menu.Item>
                         <Menu.Item onClick={onToggle}>
                             <Icon name="sidebar" />
@@ -78,7 +79,7 @@ import { useAuth0 } from "@auth0/auth0-react";
             <>
             <Menu fixed="top" inverted >
                 <Menu.Item>
-                    <Image size="mini" src="./clothes-hanger.png" />
+                    <Image size="mini" src={logo} />
                 </Menu.Item>
 
                 {leftItems.map((item) => (
@@ -153,7 +154,7 @@ function Header(){
         rightItems.push({
             children: [
               <Image avatar spaced="right" src={user.picture} key="image"/>,
-              <Dropdown pointing="top left" text="Username" key="userDropdown">
+              <Dropdown pointing="top left" text={user.name} key="userDropdown">
                 <Dropdown.Menu key="userDropdownMenu">
                   <Dropdown.Item text={user.name} key={user.name} />
                   <Dropdown.Item as={Link} to="/dashboard" text="Dashboard" key="userDashboard" />

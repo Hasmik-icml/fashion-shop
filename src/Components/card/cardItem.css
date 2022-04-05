@@ -3,14 +3,15 @@
     width: 100px;
     background:none;
 } */
-.btn{
+.ui.button.buyBtn{
+    position: relative;
     border: none;
     background: #fbe8ea;
     border-radius: 15px;
     color: chocolate;
-    margin-left: 10px;
+    margin-left: 25px; 
 }
-.btn:hover{
+.ui.button.buyBtn:hover{
     background: #d3c0ba; 
     color: #fbe8ea;
     cursor: pointer;

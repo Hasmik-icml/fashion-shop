@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Header, Image, Modal, Segment } from "semantic-ui-react";
-import BuyForm from "./ByForm";
+import BuyForm from "./BuyForm";
 import "./BuyProduct.css";
 import { confirmOrder } from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -44,7 +44,7 @@ function BuyProduct({ productInfo, item }) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button color="green" inverted floated="right">
+          <Button className="buyBtn" color="green" inverted floated="right">
             BUY
           </Button>
         }
@@ -66,13 +66,15 @@ function BuyProduct({ productInfo, item }) {
   
           <BuyForm userName={user.name} changeOptions={changeOptions} />
         </Modal.Content>
+        
         <Modal.Actions>
           <Segment>
             <Segment.Inline>
               <Button color="black" onClick={() => setOpen(false)}>
                 Nope
               </Button>
-              <Button
+              <Button 
+                className="buyBtn"
                 content="Confirm"
                 labelPosition="right"
                 icon="checkmark"
