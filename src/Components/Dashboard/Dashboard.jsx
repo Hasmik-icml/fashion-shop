@@ -8,6 +8,9 @@ import { Icon, Table, TableBody, TableCell, TableRow, Button } from "semantic-ui
 import {USER, ADMIN, PAID, UNPAID, PENDING, SENT, ONE} from "../../Services/constants"
 import AddProduct from "../products/AddProduct";
 import { Link } from "react-router-dom";
+import Tabs from "../Tabs/Tabs";
+import DataTable from "../dataTable/DataTable";
+
 
 function Dashboard() {
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
@@ -56,11 +59,11 @@ function Dashboard() {
       user[`${domainName}roles`].includes("admin") ? (
         <>
           <AddProduct/>
-        {/* <Tabs/> */}
+        <Tabs/>
         </>
       ) : (
         <>
-      {/* <DataTable/> */}
+      <DataTable/>
       </>
       )}
     </div>

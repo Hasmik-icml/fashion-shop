@@ -1,10 +1,8 @@
 import {
   Form,
   Input,
-  TextArea,
-  Button,
-  Select,
-  Radio,
+  Label,
+  TextArea
 } from "semantic-ui-react";
 
 function AddProductsForm({changeOptions}) {
@@ -19,15 +17,17 @@ function AddProductsForm({changeOptions}) {
         <Form.Field
           id="form-input-control-productName"
           control={Input}
-          label="productName"
+          label="Product Name"
           placeholder="productName"
           onChange = {(e)=>handleChange(e)}
         />
+        <Label>AMD</Label>
         <Form.Field
+            
           id="form-input-control-productPrice"
           control={Input}
           type="number"
-          label="productPrice"
+          label="Product Price"
           placeholder="0.0"
           value={"productPrice"}
           onChange = {(e)=>handleChange(e)}
@@ -35,7 +35,7 @@ function AddProductsForm({changeOptions}) {
         <Form.Field
           id="form-input-control-productDescription"
           control={TextArea}
-          label="productDescription"
+          label="Product Description"
           placeholder="productDescription"
           onChange = {(e)=>handleChange(e)}
         />
@@ -43,7 +43,7 @@ function AddProductsForm({changeOptions}) {
           id="form-input-control-productCount"
           control={Input}
           type="number"
-          label="productCount"
+          label="Product Count"
           placeholder="productCount"
           onChange = {(e)=>handleChange(e)}
         />

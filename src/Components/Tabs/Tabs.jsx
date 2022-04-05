@@ -16,7 +16,7 @@ function Tabs(pendingProducts, allProducts){
         
       ];
 return (
-    <Tab menu={{ fluid: true, vertical: true, tabular: 'right' }} panes={panes} />
+    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} />
 );
 };
 export default Tabs;

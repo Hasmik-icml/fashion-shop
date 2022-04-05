@@ -1,4 +1,4 @@
-.ui.cards>.card{
+.ui.cards> .card{
     display: flex;
     background-color:white;
     justify-content: center;
