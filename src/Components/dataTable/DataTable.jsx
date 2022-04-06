@@ -1,24 +1,38 @@
-import { Table, Icon } from "semantic-ui-react";
+import { List, Button, Image } from "semantic-ui-react";
+import logo from "../../logo.jpg";
+import "./dataTable.css";
 
-function DataTable(){
-    return(
-        <Table celled>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Status</Table.HeaderCell>
-                <Table.HeaderCell>Notes</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              <Table.Row>
-                <Table.Cell>Product1</Table.Cell>
-                <Table.Cell>Pending</Table.Cell>
-                <Table.Cell negative>Notes</Table.Cell>
-              </Table.Row>
-            </Table.Body>
-          </Table>
-    )
+function DataTable({ list }) {
+  console.log(list);
+  return (
+    <List divided verticalAlign="middle">
+      {list.map((item) => {
+        return (
+          <List.Item>
+            <List.Content floated="right">
+              <Button>Add</Button>
+            </List.Content>
+            <Image
+              avatar
+              className="product-icon"
+              src={item.product.img[0]?.imagePath || logo}
+            />
+             <List.Content>  
+             <List horizontal>
+             <List.Content>                          
+              <List.Header>{item.product.name} </List.Header>
+              {item.product.price}
+            </List.Content>
+            <List.Content > {item.orderStatus} 
+            </List.Content>
+                </List>
+               </List.Content> 
+            
+          </List.Item>
+        );
+      })}
+    </List>
+  );
 }
 
 export default DataTable;

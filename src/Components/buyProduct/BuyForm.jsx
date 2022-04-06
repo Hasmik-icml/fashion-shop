@@ -1,6 +1,4 @@
 import React, { useEffect,useState } from "react";
-
-// import { useForm } from "react-hook-form";
 import { Form, Input, TextArea, Button, Select,Radio } from 'semantic-ui-react'
 
 const options = [

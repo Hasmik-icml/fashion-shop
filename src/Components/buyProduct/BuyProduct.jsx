@@ -18,8 +18,6 @@ function BuyProduct({ productInfo, item }) {
     async function confirmAction() {
       try {
         const token = await getAccessTokenSilently();
-        console.log("options",options);
-        debugger;
         const userObj = {
           id: user.sub,
           email: user.email,
