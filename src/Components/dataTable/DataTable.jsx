@@ -19,10 +19,7 @@ function DataTable({ list }) {
             />
              <List.Content>  
              <List horizontal>
-             <List.Content>                          
-              <List.Header>{item.product.name} </List.Header>
-              {item.product.price}
-            </List.Content>
+
             <List.Content > {item.orderStatus} 
             </List.Content>
                 </List>

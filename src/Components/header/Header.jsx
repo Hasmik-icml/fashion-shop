@@ -19,9 +19,9 @@ const AppMedia = createMedia({
 
 const { Media, MediaContextProvider } = AppMedia;
 
-const NavBarMobile = (props) => {
-  const { children, leftItems, onPusherClick, onToggle, rightItems, visible } =
-    props;
+const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems, visible }) => {
+  // const { children, leftItems, onPusherClick, onToggle, rightItems, visible } =
+  //   props;
 
   return (
     <Sidebar.Pushable>
