@@ -9,38 +9,36 @@ function AddProductsForm({changeOptions}) {
 
     function handleChange(event){
             changeOptions({[event.target.name]:event.target.value});
-        }
+    }
+
   return (
     <div>
         <h4>Add New Product</h4>
       <Form>
         <Form.Field
-          id="form-input-control-productName"
+          name="productName"
           control={Input}
           label="Product Name"
           placeholder="productName"
           onChange = {(e)=>handleChange(e)}
         />
-        <Label>AMD</Label>
         <Form.Field
-            
-          id="form-input-control-productPrice"
+          name="productPrice"
           control={Input}
           type="number"
           label="Product Price"
           placeholder="0.0"
-          value={"productPrice"}
           onChange = {(e)=>handleChange(e)}
         />
         <Form.Field
-          id="form-input-control-productDescription"
+          name="productDescription"
           control={TextArea}
           label="Product Description"
           placeholder="productDescription"
           onChange = {(e)=>handleChange(e)}
         />
         <Form.Field
-          id="form-input-control-productCount"
+          name="productCount"
           control={Input}
           type="number"
           label="Product Count"

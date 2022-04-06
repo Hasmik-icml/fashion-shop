@@ -134,13 +134,6 @@ export async function confirmOrder(user, product, token, option) {
 }
 
 export async function confirmAddProduct(productObj, token) {
-    const {
-        name,
-        price,
-        currency,
-        desctiption,
-        count
-    } = productObj;
 
     try {
         const response = await fetch(`${apiURL}product`, {

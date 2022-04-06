@@ -44,7 +44,7 @@ function BuyProduct({ productInfo, item }) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button className="buyBtn" color="green" inverted floated="right">
+          <Button className="buyBtn">
             BUY
           </Button>
         }
@@ -66,7 +66,7 @@ function BuyProduct({ productInfo, item }) {
   
           <BuyForm userName={user.name} changeOptions={changeOptions} />
         </Modal.Content>
-        
+
         <Modal.Actions>
           <Segment>
             <Segment.Inline>

@@ -10,14 +10,15 @@ function AddProduct() {
       useAuth0();
   
     // const { description, image, name, price } = productInfo;
-  
+
     const [open, setOpen] = useState(false);
     const initFormData = {
         productName: "",
-        producPrice: "", 
-        producCurrency: "AMD",
-        producDescription: "", 
-        producCount: ""};
+        productPrice: "", 
+        productCurrency: "AMD",
+        productDescription: "", 
+        productCount: ""
+    };
     const [options, setOptions] = useState(initFormData);
   
     async function confirmProduct() {
@@ -27,17 +28,17 @@ function AddProduct() {
 
           const productObj = {
             name: options.productName,
-            price: options.producPrice,
-            currency: options.producCurrency,
-            price: options.producPrice,
+            price: options.productPrice,
+            currency: options.productCurrency,
             description:{
-                comment:options.producDescription,
+                comment:options.productDescription,
             },
             stock:{
                 isAvailable:true,
-                count:options.producCount
+                count:options.productCount
             }
           };
+     
           const orderStatus = await confirmAddProduct(productObj, token);
         //   console.log(orderStatus);
         } catch (error) {
@@ -56,7 +57,7 @@ function AddProduct() {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button className="buyBtn" color="green" inverted floated="right">
+          <Button className="buyBtn"  inverted >
             Add New Product
           </Button>
         }
@@ -69,7 +70,7 @@ function AddProduct() {
         <Modal.Actions>
           <Segment>
             <Segment.Inline>
-              <Button color="black" onClick={() => setOpen(false)}>
+              <Button  onClick={() => setOpen(false)}>
                 Nope
               </Button>
               <Button 

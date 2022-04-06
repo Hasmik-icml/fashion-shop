@@ -58,13 +58,13 @@ function Dashboard() {
       user[`${domainName}roles`] &&
       user[`${domainName}roles`].includes("admin") ? (
         <>
-          <AddProduct/>
-        <Tabs/>
+        <AddProduct/>
+        <Tabs pendingProducts={pendingProducts} allProducts={allProducts}/>
         </>
       ) : (
         <>
-      <DataTable/>
-      </>
+        <DataTable/>
+       </>
       )}
     </div>
   );

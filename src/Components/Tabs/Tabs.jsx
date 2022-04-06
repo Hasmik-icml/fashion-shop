@@ -9,7 +9,7 @@ function Tabs(pendingProducts, allProducts){
         {
              menuItem: 'PENDING', render: () => {
               <Tab.Pane>
-                  <DataTable />
+                  <DataTable pendingProducts={pendingProducts}/>
               </Tab.Pane> 
              }
         },
