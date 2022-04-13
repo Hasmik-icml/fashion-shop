@@ -166,8 +166,6 @@ export async function imgUpdate(productId, file, token, userId) {
   for (var key of formData.entries()) {
     console.log(key[0] + ", " + key[1]);
   }
-
-
   try {
     const response = await fetch(`${apiURL}image/add/${productId}`, {
       method: "POST",
