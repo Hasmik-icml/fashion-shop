@@ -1,8 +1,27 @@
-.product-icon{
-    width: 40px;
+.ui.avatar.image.product-icon{
+    width: 50px;
     height: auto;
-    border-radius: 50%;
+    border-radius: 20%;
 }
+/* .ui.avatar.image{
+    border-radius: 0%; 
+} */
 .grid-table{
-    height: 80px;
+    height: 90px;
+}
+.upload{
+    display: block;
+}
+.productId{
+    font-family: "Libre Baskerville", serif;
+}
+
+.ui.button.buyBtn{
+    left: 40%;
+    margin-bottom: 30px;
+}
+.price{
+    font-weight: 900;
+    font-style: italic;
+    color: brown;
 }

@@ -9,3 +9,12 @@
 .logoIcon{
     cursor: pointer;
 }
+ .pushable {
+    overflow-x: visible;
+    }
+#slide{
+    /* z-index: -1; */
+}
+.slideImg{
+    z-index: -1;
+}

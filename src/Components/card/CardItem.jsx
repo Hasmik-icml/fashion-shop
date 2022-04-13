@@ -11,7 +11,7 @@ function CardItem({ description, img, name, price, item }) {
 
   return (
     <Card centered>
-      <Image src={img.length > 0 && img[0].imagePath.includes("localhost:8080") ? img[0].imagePath : logo } height="200px" />
+      <Image src={img.length > 0 && img[0].imagePath ? img[0].imagePath : logo } height="200px" />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
         <Card.Description>{description.comment}</Card.Description>

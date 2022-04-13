@@ -42,7 +42,7 @@ function BuyProduct({ productInfo, item }) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button className="buyBtn">
+          <Button className="buyBtn modalBuyBtn">
             BUY
           </Button>
         }

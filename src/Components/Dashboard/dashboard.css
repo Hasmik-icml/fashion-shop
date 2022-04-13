@@ -1,7 +1,8 @@
-.dashboard{
-    margin-top: 200px;
-}
+
 .uploadedImages{
     display: flex;
     
+}
+.dashboard{
+    margin-top: 20px;
 }

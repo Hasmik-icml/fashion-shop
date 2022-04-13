@@ -1,10 +1,10 @@
 import "./dashboard.css";
 // import "./BuyProduct.css";
 import { domainName } from "../../config";
-import { getOrders, authoriseUser, getAllOrders, getOrderByStatus, getProducts } from "../../Services/api";
+import { getOrders, authoriseUser, getAllOrders, getOrderByStatus, getProducts, changeOrderStatus, imgUpdate} from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect} from "react";
-import { Icon, Table, TableBody, TableCell, TableRow, Button } from "semantic-ui-react";
+import { Message } from "semantic-ui-react";
 import {USER, ADMIN, PAID, UNPAID, PENDING, SENT, ONE} from "../../Services/constants"
 import AddProduct from "../products/AddProduct";
 import { Link } from "react-router-dom";
@@ -19,23 +19,33 @@ function Dashboard() {
  
   const [adminData, setAdminData] = useState({});
 
+  const [responseInfo, setResponseInfo] = useState("");
+
+  const {pendingProducts, allProducts} = adminData;
+
   async function orderShow() {
+ 
     try {
       const token = await getAccessTokenSilently();
       let data = null;
 
       if (user && user[`${domainName}roles`].includes(ADMIN)){
 
-      const dataResult = await Promise.all([await getProducts(), await getOrderByStatus(user.sub, token, UNPAID)] )
-
+      const dataResult = await Promise.all([ 
+        getProducts(), 
+        getOrderByStatus(user.sub, token, UNPAID)])
+        if (dataResult && dataResult[1] && dataResult[1].status === 401) {
+          const authorised = await authoriseUser(user, token);
+        } else {
       setAdminData((adminData) => ({
         ...adminData,
         allProducts: dataResult[0],
         pendingProducts: dataResult[1],
       }));
-      
+        }
       }else {
         data = await getOrders(user.sub, token);
+        console.log(user.sub);
         if (data && Array.isArray(data)) {
           if (data.length !== 0) setOrderList(data);
         } else if (data && data.status === 401) {
@@ -45,40 +55,70 @@ function Dashboard() {
         }
       } 
     }catch (error) {
-        console.log("hajox chi");
+        console.log("user not authorised");
       }
     }
-
-
+    
     useEffect(() => {
-      if (user) orderShow();
-    }, [user]);
-    const {pendingProducts, allProducts} = adminData;
- 
+      if (user || responseInfo.length > 0) orderShow();
+    }, [user, responseInfo]);
+
     async function changeStatus(status, order_id) {
     
     try {
       const token = await getAccessTokenSilently();
       const changeResult = await changeOrderStatus(user.sub, token, order_id, status)
       console.log("changeResult", changeResult);
+      orderShow();
     }
     catch (error) {
       console.log("sxal es arel");
     }
     }
+
+    async function uploadImg(file, productId) {
+      try {
+        const token = await getAccessTokenSilently();
+        const responseImg = await imgUpdate(productId, file, token, user.sub);
+        console.log(responseImg);
+
+        if (responseImg.httpStatus && responseImg.httpStatus==="OK") {
+          
+          setResponseInfo(responseImg.message);
+        }
+      } catch (error) {
+        console.log("something went wrong", error);
+      }
+
+      console.log("file", file);
+    }
+
+    function  handleDismiss() {
+      setResponseInfo("")
+    }
+
   return (
     <div className="dashboard ui container">
+      {responseInfo.length > 0 ? (
+        <Message success onDismiss={handleDismiss} content={responseInfo} />
+      ) : (
+        ""
+      )}
       {user &&
       user[`${domainName}roles`] &&
       user[`${domainName}roles`].includes(ADMIN) ? (
         <>
-        <AddProduct/>
-        <Tabs pendingProducts={pendingProducts} allProducts={allProducts} changeStatus ={changeStatus} />
+                           
+      <AddProduct setResponseInfo={setResponseInfo}/>
+            
+        <Tabs   uploadImg={uploadImg} pendingProducts={pendingProducts} allProducts={allProducts} changeStatus ={changeStatus} />
         </>
       ) : (
-        <>
+     <>
+ 
         <DataTable list={orderList}/>
-       </>
+     </>
+       
       )}
     </div>
   );

@@ -15,7 +15,7 @@ const Cards = () => {
   return (
     <div className="ui stackable three column grid productItems">
       
-      {result.map((item) => {
+      {result && result.length > 0 && result.map((item) => {
         // console.log(item.img);
         return (
           <CardItem

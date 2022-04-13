@@ -5,7 +5,7 @@ import AddProductsForm from "./AddProductsForm";
 import { useAuth0 } from "@auth0/auth0-react";
 import { confirmAddProduct } from "../../Services/api";
 
-function AddProduct() {
+function AddProduct({setResponseInfo}) {
     const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
       useAuth0();
   
@@ -39,14 +39,15 @@ function AddProduct() {
             }
           };
      
-          const orderStatus = await confirmAddProduct(productObj, token);
-        //   console.log(orderStatus);
+          const orderStatus = await confirmAddProduct(productObj, user.sub, token);
+          if (orderStatus.httpStatus && orderStatus.httpStatus === "OK") {
+            setResponseInfo(orderStatus.message);
+          }
         } catch (error) {
           console.log(error);
         }
       }
     function changeOptions(prop) {
-        // console.log("prop",prop);
         setOptions({ ...options, ...prop });
       }
     
@@ -64,7 +65,6 @@ function AddProduct() {
       >
         <Modal.Content >
        <AddProductsForm changeOptions={changeOptions}/>
-
         </Modal.Content>
         
         <Modal.Actions>
@@ -80,7 +80,7 @@ function AddProduct() {
                 icon="checkmark"
                 onClick={() => {
                   setOpen(false);
-                  confirmProduct();
+                  confirmProduct(user.sub);
 
                 }}
                 positive

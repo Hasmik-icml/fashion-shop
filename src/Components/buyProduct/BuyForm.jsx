@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from "react";
-import { Form, Input, TextArea, Button, Select,Radio } from 'semantic-ui-react'
+import { Form, Input,Radio } from 'semantic-ui-react'
 
 const options = [
   { key: "m", text: "Male", value: "male" },
@@ -8,7 +8,6 @@ const options = [
 ];
 
 const FormFieldError = ({userName,changeOptions}) => {
- 
   function handleChange(event){
     changeOptions({[event.target.name]:event.target.value});
   }
@@ -57,9 +56,6 @@ const FormFieldError = ({userName,changeOptions}) => {
             readOnly
           />
         </Form.Field>
-    {/* </Form.Group> */}
-    
-    
   </Form>
   )
 }

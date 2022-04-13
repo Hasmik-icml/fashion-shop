@@ -6,6 +6,7 @@ import { Outlet, Link } from "react-router-dom";
 import { Icon, Image, Menu, Sidebar, Dropdown } from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../../clothes-hanger.png";
+import { nanoid } from 'nanoid';
 
 const AppMedia = createMedia({
   breakpoints: {
@@ -20,12 +21,10 @@ const AppMedia = createMedia({
 const { Media, MediaContextProvider } = AppMedia;
 
 const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems, visible }) => {
-  // const { children, leftItems, onPusherClick, onToggle, rightItems, visible } =
-  //   props;
-
   return (
     <Sidebar.Pushable>
       <Sidebar
+      key={nanoid()}
         as={Menu}
         animation="overlay"
         icon="labeled"
@@ -37,7 +36,6 @@ const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems
       <Sidebar.Pusher
         dimmed={visible}
         onClick={onPusherClick}
-        // style={{ minHeight: "100vh" }}
       >
         <Menu fixed="top" inverted>
           <Menu.Item>
@@ -66,9 +64,7 @@ const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems
   );
 };
 
-const NavBarDesktop = (props) => {
-  const { leftItems, rightItems } = props;
-
+const NavBarDesktop = ({ leftItems, rightItems }) => {
   return (
     <>
       <Menu fixed="top" inverted>
@@ -127,7 +123,7 @@ function NavBar({ leftItems, rightItems }) {
 const leftItems = [
   { as: Link, to: "/", content: "Home", key: "home" },
   { as: Link, to: "/Products", content: "Products", key: "products" },
-  { as: Link, to: "/Reviews", content: "Reviews", key: "reviews" },
+  // { as: Link, to: "/Reviews", content: "Reviews", key: "reviews" },
 ];
 
 const rightItems = [
@@ -140,7 +136,6 @@ function Header() {
   rightItems.length = 0;
   if (isAuthenticated) {
     console.log(user);
-
     rightItems.push({
       children: [
         <Image avatar spaced="right" src={user.picture} key="image" />,
@@ -162,11 +157,8 @@ function Header() {
           </Dropdown.Menu>
         </Dropdown>,
       ],
-    });
-
-    //  rightItems.push( `<div>user.name</div>, <button onClick={()=> logout()}>Logout</button>`);
-  } else {
-    //   rightItems.push({ as: Link, to:"/login", content: "Login", key: "login" });
+    }); 
+  } else { 
     rightItems.push({
       link: { as: Link, to: "/login", content: "Login", key: "login" },
     });

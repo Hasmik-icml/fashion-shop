@@ -1,6 +1,5 @@
 .custom-modal .ui.form{
-    width: 50%;
-    
+    width: 50%; 
 }
 .ui.button.buyBtn{
     position: relative;
@@ -14,4 +13,7 @@
     background: #d3c0ba; 
     color: #fbe8ea;
     cursor: pointer;
+}
+.ui.button.modalBuyBtn{
+    left: 0;
 }
