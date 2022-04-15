@@ -36,7 +36,7 @@ function Dashboard() {
 
   const [responseInfo, setResponseInfo] = useState("");
 
-  const { pendingProducts, allProducts } = adminData;
+  const { pendingProducts, allProducts, allOrders } = adminData;
 
   async function orderShow() {
     try {
@@ -46,7 +46,8 @@ function Dashboard() {
       if (user && user[`${domainName}roles`].includes(ADMIN)) {
         const dataResult = await Promise.all([
           getProducts(),
-          getAllOrders(user.sub, token, UNPAID),
+          getOrderByStatus(user.sub, token, UNPAID),
+          getAllOrders(user.sub, token),
         ]);
         if (dataResult && dataResult[1] && dataResult[1].status === 401) {
           const authorised = await authoriseUser(user, token);
@@ -55,6 +56,7 @@ function Dashboard() {
             ...adminData,
             allProducts: dataResult[0],
             pendingProducts: dataResult[1],
+            allOrders: dataResult[2],
           }));
           if(adminData ) console.log("adminData", adminData);
         }
@@ -114,8 +116,9 @@ function Dashboard() {
     setResponseInfo("");
   }
   console.log(adminData);
-  console.log("pendingProducts ", pendingProducts)
-  console.log("orderList", orderList)
+  console.log("pendingProducts ", pendingProducts);
+  console.log("allOrder ", allOrders);
+  console.log("orderList", orderList);
   return (
     <div className="dashboard ui container">
       {responseInfo.length > 0 && responseInfo === "something went wrong" ? (
@@ -134,8 +137,10 @@ function Dashboard() {
           <Tabs
             uploadImg={uploadImg}
             pendingProducts={pendingProducts}
+            allOrders={allOrders}
             allProducts={allProducts}
             changeStatus={changeStatus}
+
           />
         </>
       ) : (

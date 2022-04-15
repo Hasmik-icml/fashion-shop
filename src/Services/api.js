@@ -15,6 +15,7 @@ export async function getProducts() {
     }
 }
 
+//for user
 export async function getOrders(user_id, token) {
     try {
         console.log(user_id);
@@ -32,6 +33,7 @@ export async function getOrders(user_id, token) {
     }
 }
 
+//for admin
 export async function getAllOrders(user_id, token) {
     try {
         const response = await fetch(`${apiURL}order/get-all`, {
@@ -49,8 +51,8 @@ export async function getAllOrders(user_id, token) {
 
 export async function getOrderByStatus(user_id, token, status) {
     try {
-        console.log(user_id, status);
-        const response = await fetch(`${apiURL}order/user-order`, {
+        console.log( user_id, status);
+        const response = await fetch(`${apiURL}order/order-status`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
