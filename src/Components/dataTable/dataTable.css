@@ -10,7 +10,16 @@
     height: 90px;
 }
 .upload{
-    display: block;
+   border: none;
+   background: none;
+   color: brown;
+   cursor: pointer;
+}
+.icon.iconUpload{
+   font-size: 20px;
+}
+input[type=file] {
+    display: none;
 }
 .productId{
     font-family: "Libre Baskerville", serif;
@@ -21,6 +30,7 @@
     margin-bottom: 30px;
 }
 .price{
+    font-size: 14px;
     font-weight: 900;
     font-style: italic;
     color: brown;

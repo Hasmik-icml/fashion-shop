@@ -1,6 +1,6 @@
 import "./dataTable.css";
-import logo from "../../logo.jpg";
-import { List, Grid, Segment, Image } from "semantic-ui-react";
+import logo from "../../logo.png";
+import { List, Grid, Segment, Image, Icon,Input } from "semantic-ui-react";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import AddProduct from "../products/AddProduct";
@@ -13,7 +13,7 @@ function DataTable({ list, uploadImg }) {
     setImgFile(e.target.files[0]);
   }
   useEffect(() => {
-    console.log(imgFile);
+    console.log("imgFile ", imgFile);
   }, [imgFile]);
   return (
     <div>
@@ -58,13 +58,18 @@ function DataTable({ list, uploadImg }) {
                             uploadImg(imgFile, item.id);
                           }}
                         >
+                          <label className="upload" htmlFor ="file-input">
+                          <Icon className="iconUpload" name="images" />
+                          </label>
                           <input
+                            id = "file-input"
+                            className="upload imgBtn"
                             type="file"
-                            onChange={onChange}
-                            className="upload"
-                          />
+                            onChange={(e)=>onChange(e)}
+                          ></input>
+                         
                           <button type="submit" className="upload">
-                            Upload!
+                          <Icon className="upload iconUpload" name="upload" />
                           </button>
                         </form>
                       </List.Content>

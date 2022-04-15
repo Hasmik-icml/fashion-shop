@@ -5,7 +5,7 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { Icon, Image, Menu, Sidebar, Dropdown } from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
-import logo from "../../clothes-hanger.png";
+import logo from "../../logo.png";
 import { nanoid } from 'nanoid';
 
 const AppMedia = createMedia({

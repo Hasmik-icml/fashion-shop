@@ -46,7 +46,7 @@ function Dashboard() {
       if (user && user[`${domainName}roles`].includes(ADMIN)) {
         const dataResult = await Promise.all([
           getProducts(),
-          getOrderByStatus(user.sub, token, UNPAID),
+          getAllOrders(user.sub, token, UNPAID),
         ]);
         if (dataResult && dataResult[1] && dataResult[1].status === 401) {
           const authorised = await authoriseUser(user, token);
@@ -56,6 +56,7 @@ function Dashboard() {
             allProducts: dataResult[0],
             pendingProducts: dataResult[1],
           }));
+          if(adminData ) console.log("adminData", adminData);
         }
       } else {
         data = await getOrders(user.sub, token);
@@ -113,7 +114,8 @@ function Dashboard() {
     setResponseInfo("");
   }
   console.log(adminData);
-  console.log(responseInfo)
+  console.log("pendingProducts ", pendingProducts)
+  console.log("orderList", orderList)
   return (
     <div className="dashboard ui container">
       {responseInfo.length > 0 && responseInfo === "something went wrong" ? (
