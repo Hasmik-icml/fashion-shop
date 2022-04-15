@@ -36,7 +36,7 @@ function Dashboard() {
 
   const [responseInfo, setResponseInfo] = useState("");
 
-  const { pendingProducts, allProducts, allOrders, allDoneOrders } = adminData;
+  const { allProducts, pendingOrders, unpaidOrders,  sentOrders, paidOrders, allDoneOrders , allOrders  } = adminData;
 
   async function orderShow() {
     try {
@@ -46,7 +46,10 @@ function Dashboard() {
       if (user && user[`${domainName}roles`].includes(ADMIN)) {
         const dataResult = await Promise.all([
           getProducts(),
+          getOrderByStatus(user.sub, token, PENDING),
           getOrderByStatus(user.sub, token, UNPAID),
+          getOrderByStatus(user.sub, token, SENT),
+          getOrderByStatus(user.sub, token, PAID),
           getOrderByStatus(user.sub, token, DONE),
           getAllOrders(user.sub, token),
         ]);
@@ -56,9 +59,12 @@ function Dashboard() {
           setAdminData((adminData) => ({
             ...adminData,
             allProducts: dataResult[0],
-            pendingProducts: dataResult[1],
-            allDoneOrders: dataResult[2],
-            allOrders: dataResult[3],
+            pendingOrders: dataResult[1],
+            unpaidOrders: dataResult[2],
+            sentOrders:dataResult[3],
+            paidOrders:dataResult[4],
+            allDoneOrders: dataResult[5],
+            allOrders: dataResult[6],
           }));
           if (adminData) console.log("adminData", adminData);
         }
@@ -118,7 +124,7 @@ function Dashboard() {
     setResponseInfo("");
   }
   console.log(adminData);
-  console.log("pendingProducts ", pendingProducts);
+  console.log("unpaidOrders ", unpaidOrders);
   console.log("allDoneOrders ", allDoneOrders);
   console.log("allOrder ", allOrders);
   console.log("orderList", orderList);
@@ -139,10 +145,13 @@ function Dashboard() {
           <AddProduct setResponseInfo={setResponseInfo} />
           <Tabs
             uploadImg={uploadImg}
-            pendingProducts={pendingProducts}
+            pendingOrders={pendingOrders}
+            unpaidOrders={unpaidOrders}
+            sentOrders={sentOrders}
+            paidOrders={paidOrders}
             allOrders={allOrders}
-            allProducts={allProducts}
             allDoneOrders={allDoneOrders}
+            allProducts={allProducts}
             changeStatus={changeStatus}
           />
         </>
