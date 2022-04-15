@@ -17,3 +17,15 @@
 .ui.button.modalBuyBtn{
     left: 0;
 }
+.ui.modal>.content>.image+.description {
+    font-style: italic;
+    font-weight: 700;
+    color: rgb(197, 145, 160);
+}
+.ui.header{
+    font-weight: 100;
+    color: rgb(138 116 118)
+}
+.ui.header+p{
+    color: rgb(193, 193, 193);
+}

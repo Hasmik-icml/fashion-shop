@@ -27,7 +27,7 @@ function CardItem({ description, img, name, price, item, currency }) {
         {isAuthenticated ? (
           <BuyProduct
             item={item}
-            productInfo={{ description, img, name, price }}
+          productInfo={{ description, img, name, price, currency }}
           />
         ) : (
           <Button as={Link} to="/login" className="buyBtn">
