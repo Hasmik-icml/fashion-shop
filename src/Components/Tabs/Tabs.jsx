@@ -4,8 +4,8 @@ import DataTable from '../dataTable/DataTable'
 import PendingTable from '../dataTable/PandingTable';
 
 
-function Tabs({uploadImg, pendingProducts, allOrders, allDoneOrders, allProducts, changeStatus}){
-    console.log("pendingProducts", pendingProducts);
+function Tabs({uploadImg, pendingOrders, sentOrders, paidOrders, unpaidOrder, allOrders, allDoneOrders, allProducts, changeStatus}){
+  
   const panes = [
     {
       menuItem: "All Products",     
@@ -16,7 +16,7 @@ function Tabs({uploadImg, pendingProducts, allOrders, allDoneOrders, allProducts
       )
     },
     { 
-        menuItem: "Pending", 
+        menuItem: "All Orders", 
         render: () =>(
           <Tab.Pane>
           <PendingTable list = {allOrders} changeStatus = {changeStatus} />
@@ -24,10 +24,34 @@ function Tabs({uploadImg, pendingProducts, allOrders, allDoneOrders, allProducts
         ) 
     },
     { 
+      menuItem: "Pending", 
+      render: () =>(
+        <Tab.Pane>
+        <PendingTable list = {pendingOrders} changeStatus = {changeStatus} />
+        </Tab.Pane> 
+      ) 
+  },
+    { 
       menuItem: "UNPAID orders", 
       render: () =>(
         <Tab.Pane>
-        <PendingTable list = {pendingProducts} changeStatus = {changeStatus} />
+        <PendingTable list = {unpaidOrder} changeStatus = {changeStatus} />
+        </Tab.Pane> 
+      ) 
+    },
+    { 
+      menuItem: "SENT", 
+      render: () =>(
+        <Tab.Pane>
+        <PendingTable list = {sentOrders} changeStatus = {changeStatus} />
+        </Tab.Pane> 
+      ) 
+    },
+    { 
+      menuItem: "PAID", 
+      render: () =>(
+        <Tab.Pane>
+        <PendingTable list = {paidOrders} changeStatus = {changeStatus} />
         </Tab.Pane> 
       ) 
     },
