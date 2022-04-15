@@ -4,16 +4,15 @@ import { useState } from "react";
 import { Button, Card, Icon, Image } from "semantic-ui-react";
 import BuyProduct from "../buyProduct/BuyProduct";
 import { Link } from "react-router-dom";
-import logo from "../../logo.jpg";
+import logo from "../../logoNavBar.jpg";
 
 function CardItem({ description, img, name, price, item, currency }) {
   const { isAuthenticated, user } = useAuth0();
 
   return (
     <Card centered>
-      <Image
+      <Image className="cardImg"
         src={img.length > 0 && img[0].imagePath ? img[0].imagePath : logo}
-        height="200px"
       />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
