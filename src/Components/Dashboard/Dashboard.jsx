@@ -58,7 +58,7 @@ function Dashboard() {
             pendingProducts: dataResult[1],
             allOrders: dataResult[2],
           }));
-          if(adminData ) console.log("adminData", adminData);
+          if (adminData) console.log("adminData", adminData);
         }
       } else {
         data = await getOrders(user.sub, token);
@@ -123,12 +123,12 @@ function Dashboard() {
     <div className="dashboard ui container">
       {responseInfo.length > 0 && responseInfo === "something went wrong" ? (
         <Message negative onDismiss={handleDismiss} content={responseInfo} />
-      ) : responseInfo.length > 0 && responseInfo !== "something went wrong" ? 
+      ) : responseInfo.length > 0 && responseInfo !== "something went wrong" ? (
         <Message success onDismiss={handleDismiss} content={responseInfo} />
-        :(
+      ) : (
         ""
       )}
-  
+
       {user &&
       user[`${domainName}roles`] &&
       user[`${domainName}roles`].includes(ADMIN) ? (
@@ -140,7 +140,6 @@ function Dashboard() {
             allOrders={allOrders}
             allProducts={allProducts}
             changeStatus={changeStatus}
-
           />
         </>
       ) : (
