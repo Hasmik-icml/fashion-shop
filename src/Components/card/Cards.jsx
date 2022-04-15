@@ -25,6 +25,7 @@ const Cards = () => {
             img={item.img}
             name={item.name}
             price={item.price}
+            currency={item.currency}
           />
         );
       })}
