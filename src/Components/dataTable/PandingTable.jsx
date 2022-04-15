@@ -4,16 +4,14 @@ import { Grid, Segment, List, Image, Dropdown } from "semantic-ui-react";
 import logo from "../../logo.png";
 import "./dataTable.css";
 
-function PendingTable({ list, changeStatus }) {
-
+function PendingTable({ list, changeStatus, tabName }) {
   // const [result, setResult] = useState(list);
 
   // useEffect(() => {
   //   if (list && list.length > 0) setResult(list);
   // }, [list]);
 
-
-console.log("list", list);
+  console.log("list", list);
   return (
     <>
       {list &&
@@ -23,7 +21,10 @@ console.log("list", list);
           return (
             <Grid className="grid-table" key={nanoid()}>
               <Grid.Row>
-                <Grid.Column width="5">
+                <Grid.Column width="3">
+                  <Segment.Inline className="orderId">{`Order Number N ${item.id}`}</Segment.Inline>
+                </Grid.Column>
+                <Grid.Column width="3">
                   <Segment.Inline>
                     <Image
                       avatar
@@ -32,7 +33,7 @@ console.log("list", list);
                     />
                   </Segment.Inline>
                 </Grid.Column>
-                <Grid.Column width="6">
+                <Grid.Column width="4">
                   <Segment.Inline>
                     <List.Content>
                       <List.Header>{item.product.name} </List.Header>
@@ -43,40 +44,79 @@ console.log("list", list);
                 <Grid.Column width="3">
                   <Segment.Inline>{item.orderStatus}</Segment.Inline>
                 </Grid.Column>
-                <Grid.Column width="2">
+                <Grid.Column width="3">
                   <Segment.Inline>
-                    <Dropdown pointing="top left" text="Edit">
-                      <Dropdown.Menu>
-                        <Dropdown.Item
-                          onClick={() => {
-                            changeStatus("PENDING", item.id);
-                          }}
-                          text="Pending"
-                          icon="plus"
-                        />
-                        <Dropdown.Item
-                          onClick={() => {
-                            changeStatus("SENT", item.id);
-                          }}
-                          text="Sent"
-                          icon="calendar"
-                        />
-                        <Dropdown.Item
-                          onClick={() => {
-                            changeStatus("PAID", item.id);
-                          }}
-                          text="Paid"
-                          icon="calendar"
-                        />
-                        <Dropdown.Item
-                          onClick={() => {
-                            changeStatus("DONE", item.id);
-                          }}
-                          text="Done"
-                          icon="calendar"
-                        />
-                      </Dropdown.Menu>
-                    </Dropdown>
+                    {tabName === "DONE" ? (
+                      <Dropdown
+                        pointing="top left"
+                        text="Edit"
+                        className="disabled"
+                      >
+                        <Dropdown.Menu className="doneTab ">
+                          <Dropdown.Item
+                            onClick={() => {
+                              changeStatus("PENDING", item.id);
+                            }}
+                            text="Pending"
+                            icon="plus"
+                          />
+                          <Dropdown.Item
+                            onClick={() => {
+                              changeStatus("SENT", item.id);
+                            }}
+                            text="Sent"
+                            icon="calendar"
+                          />
+                          <Dropdown.Item
+                            onClick={() => {
+                              changeStatus("PAID", item.id);
+                            }}
+                            text="Paid"
+                            icon="calendar"
+                          />
+                          <Dropdown.Item
+                            onClick={() => {
+                              changeStatus("DONE", item.id);
+                            }}
+                            text="Done"
+                            icon="calendar"
+                          />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    ) : (
+                      <Dropdown pointing="top left" text="Edit">
+                        <Dropdown.Menu className="doneTab ">
+                          <Dropdown.Item
+                            onClick={() => {
+                              changeStatus("PENDING", item.id);
+                            }}
+                            text="Pending"
+                            icon="plus"
+                          />
+                          <Dropdown.Item
+                            onClick={() => {
+                              changeStatus("SENT", item.id);
+                            }}
+                            text="Sent"
+                            icon="calendar"
+                          />
+                          <Dropdown.Item
+                            onClick={() => {
+                              changeStatus("PAID", item.id);
+                            }}
+                            text="Paid"
+                            icon="calendar"
+                          />
+                          <Dropdown.Item
+                            onClick={() => {
+                              changeStatus("DONE", item.id);
+                            }}
+                            text="Done"
+                            icon="calendar"
+                          />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    )}
                   </Segment.Inline>
                 </Grid.Column>
               </Grid.Row>

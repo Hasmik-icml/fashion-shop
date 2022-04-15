@@ -4,7 +4,7 @@ import DataTable from '../dataTable/DataTable'
 import PendingTable from '../dataTable/PandingTable';
 
 
-function Tabs({uploadImg, pendingProducts, allOrders, allProducts, changeStatus}){
+function Tabs({uploadImg, pendingProducts, allOrders, allDoneOrders, allProducts, changeStatus}){
     console.log("pendingProducts", pendingProducts);
   const panes = [
     {
@@ -30,7 +30,15 @@ function Tabs({uploadImg, pendingProducts, allOrders, allProducts, changeStatus}
         <PendingTable list = {pendingProducts} changeStatus = {changeStatus} />
         </Tab.Pane> 
       ) 
-  },
+    },
+    { 
+      menuItem: "DONE", 
+      render: () =>(
+        <Tab.Pane>
+        <PendingTable list = {allDoneOrders} changeStatus = {changeStatus} tabName={"DONE"} />
+        </Tab.Pane> 
+      ) 
+    },
   ];
   return (
 <> 

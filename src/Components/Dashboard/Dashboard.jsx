@@ -20,7 +20,7 @@ import {
   UNPAID,
   PENDING,
   SENT,
-  ONE,
+  DONE,
 } from "../../Services/constants";
 import AddProduct from "../products/AddProduct";
 import { Link } from "react-router-dom";
@@ -36,7 +36,7 @@ function Dashboard() {
 
   const [responseInfo, setResponseInfo] = useState("");
 
-  const { pendingProducts, allProducts, allOrders } = adminData;
+  const { pendingProducts, allProducts, allOrders, allDoneOrders } = adminData;
 
   async function orderShow() {
     try {
@@ -47,6 +47,7 @@ function Dashboard() {
         const dataResult = await Promise.all([
           getProducts(),
           getOrderByStatus(user.sub, token, UNPAID),
+          getOrderByStatus(user.sub, token, DONE),
           getAllOrders(user.sub, token),
         ]);
         if (dataResult && dataResult[1] && dataResult[1].status === 401) {
@@ -56,7 +57,8 @@ function Dashboard() {
             ...adminData,
             allProducts: dataResult[0],
             pendingProducts: dataResult[1],
-            allOrders: dataResult[2],
+            allDoneOrders: dataResult[2],
+            allOrders: dataResult[3],
           }));
           if (adminData) console.log("adminData", adminData);
         }
@@ -117,6 +119,7 @@ function Dashboard() {
   }
   console.log(adminData);
   console.log("pendingProducts ", pendingProducts);
+  console.log("allDoneOrders ", allDoneOrders);
   console.log("allOrder ", allOrders);
   console.log("orderList", orderList);
   return (
@@ -139,6 +142,7 @@ function Dashboard() {
             pendingProducts={pendingProducts}
             allOrders={allOrders}
             allProducts={allProducts}
+            allDoneOrders={allDoneOrders}
             changeStatus={changeStatus}
           />
         </>
