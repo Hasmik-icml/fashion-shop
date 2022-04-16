@@ -10,19 +10,19 @@ const [userData, setUserData] = useState({});
 const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = userData;
 
     function userPendingsOrders(orderList){
-        return orderList.filter(item => item.orderStatus === "PENDING")
+        return orderList.filter(item => item.orderStatus === "PENDING").sort((a,b) => b.date - a.date);
     }
     function userUnpaidOrders(orderList){
-        return orderList.filter(item => item.orderStatus === "UNPAID")
+        return orderList.filter(item => item.orderStatus === "UNPAID").sort((a,b) => b.date - a.date);
     }
     function userSentOrders(orderList){
-        return orderList.filter(item => item.orderStatus === "SENT")
+        return orderList.filter(item => item.orderStatus === "SENT").sort((a,b) => b.date - a.date);
     }
     function userPaidOrders(orderList){
-        return orderList.filter(item => item.orderStatus === "PAID")
+        return orderList.filter(item => item.orderStatus === "PAID").sort((a,b) => b.date - a.date);
     }
     function userDoneOrders(orderList){
-        return orderList.filter(item => item.orderStatus === "DONE")
+        return orderList.filter(item => item.orderStatus === "DONE").sort((a,b) => b.date - a.date);
     }
 
     useEffect(()=>{

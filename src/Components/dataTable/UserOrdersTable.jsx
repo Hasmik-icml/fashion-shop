@@ -7,17 +7,20 @@ import "./dataTable.css";
 
 function UserOrdersTable({list}){
 
+  const [date, setDate] =useState();
+
+
   console.log(list);
   return(
     <>
     {list &&
       list.length > 0 &&
       list.map((item) => {
-        console.log("item", item);
+        console.log("item", new Date(1649772757129).toString());
         return (
             <Popup
             inverted
-            content={Date(item.date)}
+            content={new Date(item.date).toString()}
             key={item.name}
             header={item.user.name}
             className="tooltip"
