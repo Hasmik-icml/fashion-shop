@@ -23,9 +23,8 @@ import {
   DONE,
 } from "../../Services/constants";
 import AddProduct from "../products/AddProduct";
-import { Link } from "react-router-dom";
 import Tabs from "../Tabs/Tabs";
-import DataTable from "../dataTable/DataTable";
+import UserOrdersTabs from "../Tabs/UserOrdersTabs";
 
 function Dashboard() {
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
@@ -38,6 +37,7 @@ function Dashboard() {
 
   const { allProducts, pendingOrders, unpaidOrders,  sentOrders, paidOrders, allDoneOrders , allOrders  } = adminData;
 
+  
   async function orderShow() {
     try {
       const token = await getAccessTokenSilently();
@@ -70,7 +70,7 @@ function Dashboard() {
         }
       } else {
         data = await getOrders(user.sub, token);
-        console.log(user.sub);
+    
         if (data && Array.isArray(data)) {
           if (data.length !== 0) setOrderList(data);
         } else if (data && data.status === 401) {
@@ -157,7 +157,7 @@ function Dashboard() {
         </>
       ) : (
         <>
-          <DataTable list={orderList} />
+          <UserOrdersTabs orderList={orderList} />
         </>
       )}
     </div>
