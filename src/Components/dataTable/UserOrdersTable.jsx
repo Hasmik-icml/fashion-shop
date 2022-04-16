@@ -3,20 +3,28 @@ import { useEffect, useState } from "react";
 import { Grid, Segment, List, Image, Dropdown, Popup } from "semantic-ui-react";
 import logo from "../../logoNavBar.jpg";
 import "./dataTable.css";
+import Paginations from "../pagination/Pagination";
 
 
 function UserOrdersTable({list}){
+  console.log("list tabsi hamar ", list);
+  // const [result, setResult] = useState([]);
+  // const [productsByPage, setProductsByPage] = useState([]);
 
-  const [date, setDate] =useState();
+  // function getProductsByPage(productsByPage){
+  //   setProductsByPage(productsByPage)
+  // }
 
+  // useEffect(() =>{
+  //   if (list && list.length > 0) setResult(list)
+  // }, [productsByPage, list])
 
-  console.log(list);
+  // console.log("productsByPage ", productsByPage);
   return(
     <>
     {list &&
       list.length > 0 &&
       list.map((item) => {
-        console.log("item", new Date(1649772757129).toString());
         return (
             <Popup
             inverted
@@ -58,9 +66,11 @@ function UserOrdersTable({list}){
               </Grid.Row>
             </Grid>
             }
+            
             />
         );
       })}
+       {/* <Paginations result={result} getProductsByPage={getProductsByPage}/> */}
   </>
   )
 }

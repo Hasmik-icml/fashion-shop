@@ -25,6 +25,10 @@ import {
 import AddProduct from "../products/AddProduct";
 import Tabs from "../Tabs/Tabs";
 import UserOrdersTabs from "../Tabs/UserOrdersTabs";
+import { createContext } from "react";
+
+//*
+export const DataContext = createContext();
 
 function Dashboard() {
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
@@ -42,6 +46,7 @@ function Dashboard() {
     try {
       const token = await getAccessTokenSilently();
       let data = null;
+      // let dataForlastOrderNumber = null;
 
       if (user && user[`${domainName}roles`].includes(ADMIN)) {
         const dataResult = await Promise.all([
@@ -70,7 +75,7 @@ function Dashboard() {
         }
       } else {
         data = await getOrders(user.sub, token);
-    
+
         if (data && Array.isArray(data)) {
           if (data.length !== 0) setOrderList(data);
         } else if (data && data.status === 401) {
@@ -78,6 +83,9 @@ function Dashboard() {
         } else {
           console.log("hajox");
         }
+
+        // dataForlastOrderNumber = await getAllOrders(user.sub, token);
+        
       }
     } catch (error) {
       console.log("user not authorised");
@@ -123,13 +131,16 @@ function Dashboard() {
   function handleDismiss() {
     setResponseInfo("");
   }
+
   console.log(adminData);
   console.log("unpaidOrders ", unpaidOrders);
   console.log("allDoneOrders ", allDoneOrders);
   console.log("allOrder ", allOrders);
   console.log("orderList", orderList);
   return (
-    <div className="dashboard ui container">
+    //*
+ <DataContext.Provider value={{orderList}}>
+      <div className="dashboard ui container">
       {responseInfo.length > 0 && responseInfo === "something went wrong" ? (
         <Message negative onDismiss={handleDismiss} content={responseInfo} />
       ) : responseInfo.length > 0 && responseInfo !== "something went wrong" ? (
@@ -161,6 +172,8 @@ function Dashboard() {
         </>
       )}
     </div>
+    
+ </DataContext.Provider>
   );
 }
 export default Dashboard;

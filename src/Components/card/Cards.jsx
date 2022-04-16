@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
 import { getData, getProducts } from "../../Services/api";
 import CardItem from "./CardItem";
+import Paginations from "../pagination/Pagination";
 import "./card.css"
 
 const Cards = () => {
   const [result, setResult] = useState([]);
+  const [productsByPage, setProductsByPage] = useState([]);
 
+  function getProductsByPage(productsByPage){
+    setProductsByPage(productsByPage)
+  }
   useEffect(() => {
     getProducts().then((param) => {
       setResult(param);
     });
-  }, []);
+  }, [productsByPage]);
 
   return (
-    <div className="ui stackable three column grid productItems">
-      
-      {result && result.length > 0 && result.map((item) => {
-        // console.log(item.img);
+    <>
+    <div className="ui stackable three column grid productItems"> 
+      {productsByPage && productsByPage.length > 0 && productsByPage.map((item) => {
         return (
           <CardItem
             item={item}
@@ -30,6 +34,8 @@ const Cards = () => {
         );
       })}
     </div>
+      <Paginations result={result} getProductsByPage={getProductsByPage}/>
+      </>
   );
 };
 
