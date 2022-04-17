@@ -1,23 +1,18 @@
-import React, { useState, useContext, useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import { Button, Form, Header, Image, Modal, Segment } from "semantic-ui-react";
 import BuyForm from "./BuyForm";
 import "./BuyProduct.css";
 import logo from "../../logoNavBar.jpg";
 import { confirmOrder } from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
-import {DataContext} from "../Dashboard/Dashboard"
 
 function BuyProduct({ productInfo, item }) {
-
-  const getContext = useContext(DataContext);
-  
-  console.log("getContext.lenghth===", getContext ? getContext.length : 0);
 
     const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
       useAuth0();
   
     const { description, img, name, price, currency } = productInfo;
-    const [contextData, setContextData] = useState([]);
+  
     const [open, setOpen] = useState(false);
     const inintFormData = { address: "", phone: "", paymentMethod: "cash" };
     const [options, setOptions] = useState(inintFormData);
@@ -44,13 +39,6 @@ function BuyProduct({ productInfo, item }) {
       console.log("prop",prop);
       setOptions({ ...options, ...prop });
     }
-  useEffect(()=>{
-    setContextData(getContext ? getContext :  "loading ...")
-  }, [getContext])
-
- console.log("contextData.lenghth===", contextData );
- 
-
     return (
       <Modal
         className="custom-modal"

@@ -25,10 +25,7 @@ import {
 import AddProduct from "../products/AddProduct";
 import Tabs from "../Tabs/Tabs";
 import UserOrdersTabs from "../Tabs/UserOrdersTabs";
-import { createContext } from "react";
 
-//*
-export const DataContext = createContext();
 
 function Dashboard() {
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
@@ -46,7 +43,6 @@ function Dashboard() {
     try {
       const token = await getAccessTokenSilently();
       let data = null;
-      // let dataForlastOrderNumber = null;
 
       if (user && user[`${domainName}roles`].includes(ADMIN)) {
         const dataResult = await Promise.all([
@@ -83,8 +79,6 @@ function Dashboard() {
         } else {
           console.log("hajox");
         }
-
-        // dataForlastOrderNumber = await getAllOrders(user.sub, token);
         
       }
     } catch (error) {
@@ -138,8 +132,6 @@ function Dashboard() {
   console.log("allOrder ", allOrders);
   console.log("orderList", orderList);
   return (
-    //*
- <DataContext.Provider value={{orderList}}>
       <div className="dashboard ui container">
       {responseInfo.length > 0 && responseInfo === "something went wrong" ? (
         <Message negative onDismiss={handleDismiss} content={responseInfo} />
@@ -173,7 +165,6 @@ function Dashboard() {
       )}
     </div>
     
- </DataContext.Provider>
   );
 }
 export default Dashboard;
