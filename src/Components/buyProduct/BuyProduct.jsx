@@ -17,9 +17,6 @@ function BuyProduct({ productInfo, item }) {
     const inintFormData = { address: "", phone: "", paymentMethod: "cash" };
     const [options, setOptions] = useState(inintFormData);
 
-  console.log("currency ", currency);
-  console.log("productInfo ", productInfo);
-
     async function confirmAction() {
       try {
         const token = await getAccessTokenSilently();
@@ -35,8 +32,13 @@ function BuyProduct({ productInfo, item }) {
         console.log(error);
       }
     }
+
+    // function validation(dataForValidate){
+
+    // }
     function changeOptions(prop) {
       console.log("prop",prop);
+      
       setOptions({ ...options, ...prop });
     }
     return (
