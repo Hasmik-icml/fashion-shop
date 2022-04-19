@@ -184,3 +184,18 @@ export async function imgUpdate(productId, file, token, userId) {
     console.log("sxalPost", error);
   }
 }
+
+export async function isUserExists(user_id, token) {
+    try {
+        const response = await fetch(`${apiURL}user`,{  
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                userId: user_id
+            }
+        })
+        return await response.json();
+    } catch (error) {
+        console.log("wrong", error);
+    }
+}
