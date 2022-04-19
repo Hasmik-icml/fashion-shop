@@ -11,11 +11,13 @@ const Cards = () => {
   function getProductsByPage(productsByPage){
     setProductsByPage(productsByPage)
   }
+  
   useEffect(() => {
-    getProducts().then((param) => {
-      setResult(param);
-    });
-  }, [productsByPage]);
+   (async ()=> {
+      let data = await getProducts();
+      setResult(data);
+    })();
+  }, []);
 
   return (
     <>
