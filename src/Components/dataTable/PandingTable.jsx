@@ -22,7 +22,7 @@ function PendingTable({ list, changeStatus, tabName }) {
               <Popup
               inverted
               content={new Date(item.date).toString()}
-              key={item.name}
+              key={nanoid()}
               header={item.user.name}
               className="tooltip"
               trigger={

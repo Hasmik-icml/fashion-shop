@@ -6,7 +6,7 @@ import logo from "../../logoNavBar.jpg";
 import { confirmOrder } from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
 
-function BuyProduct({ productInfo, item }) {
+function BuyProduct({ productInfo, item, statusForStock }) {
 
     const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
       useAuth0();
@@ -33,9 +33,6 @@ function BuyProduct({ productInfo, item }) {
       }
     }
 
-    // function validation(dataForValidate){
-
-    // }
     function changeOptions(prop) {
       console.log("prop",prop);
       
@@ -48,7 +45,7 @@ function BuyProduct({ productInfo, item }) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button className="buyBtn modalBuyBtn">
+          <Button className="buyBtn modalBuyBtn" disabled={statusForStock} >
             BUY
           </Button>
         }

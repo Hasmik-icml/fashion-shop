@@ -1,18 +1,13 @@
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-import { Grid, Segment, List, Image, Dropdown, Popup } from "semantic-ui-react";
+import { Grid, Segment, List, Image, Popup } from "semantic-ui-react";
 import logo from "../../logoNavBar.jpg";
 import "./dataTable.css";
-import Paginations from "../pagination/Pagination";
 
 
 function UserOrdersTable({list}){
   console.log("list tabsi hamar ", list);
   const [result, setResult] = useState([]);
-
-  // function getProductsByPage(productsByPage){
-  //   setProductsByPage(productsByPage)
-  // }
 
   useEffect(() =>{
     if (list && list.length > 0) setResult(list)
@@ -59,16 +54,13 @@ function UserOrdersTable({list}){
                   <Segment.Inline>{item.orderStatus}</Segment.Inline>
                 </Grid.Column>
                 <Grid.Column width="3">
-
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-            }
-            
+            }    
             />   
         );     
       })}
-       {/* <Paginations result={result} getProductsByPage={getProductsByPage}/> */}
   </>
   )
 }

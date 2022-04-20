@@ -22,7 +22,7 @@ function DataTable({ list, uploadImg }) {
         list.map((item) => {
           console.log(item);
           return (
-            <>
+         
               <Grid className="grid-table" key={nanoid()}>
                 <Grid.Row>
                   <Grid.Column width="2">
@@ -75,9 +75,14 @@ function DataTable({ list, uploadImg }) {
                       </List.Content>
                     </Segment.Inline>
                   </Grid.Column>
+
+                  <Grid.Column width="2">
+                    <Segment.Inline className="in-stock">{`In Stock ${item.stock.count}`}</Segment.Inline>
+                  </Grid.Column>
+
                 </Grid.Row>
               </Grid>
-            </>
+           
           );
         })}
     </div>

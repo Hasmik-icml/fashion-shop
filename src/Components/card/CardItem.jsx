@@ -6,10 +6,12 @@ import BuyProduct from "../buyProduct/BuyProduct";
 import { Link } from "react-router-dom";
 import logo from "../../logoNavBar.jpg";
 
-function CardItem({ description, img, name, price, item, currency }) {
+function CardItem({ description, img, name, price, item, currency, stock }) {
   const { isAuthenticated, user } = useAuth0();
 
   return (
+    <>
+    {stock < 1 ? 
     <Card centered>
       <Image className="cardImg"
         src={img.length > 0 && img[0].imagePath ? img[0].imagePath : logo}
@@ -20,11 +22,15 @@ function CardItem({ description, img, name, price, item, currency }) {
           {price} {currency}
         </Card.Content>
         <Card.Description>{description}</Card.Description>
+        <Card.Content>
+        {`In Stock ${stock}`}
+        </Card.Content>
       </Card.Content>
 
       <Card.Content>
         {isAuthenticated ? (
           <BuyProduct
+          statusForStock={true} 
             item={item}
             productInfo={{ description, img, name, price, currency }}
           />
@@ -34,7 +40,39 @@ function CardItem({ description, img, name, price, item, currency }) {
           </Button>
         )}
       </Card.Content>
-    </Card>
+    </Card>:
+    <Card centered>
+    <Image className="cardImg"
+      src={img.length > 0 && img[0].imagePath ? img[0].imagePath : logo}
+    />
+    <Card.Content>
+      <Card.Header>{name}</Card.Header>
+      <Card.Content>
+        {price} {currency}
+      </Card.Content>
+      <Card.Description>{description}</Card.Description>
+      <Card.Content>
+      {`In Stock ${stock}`}
+      </Card.Content>
+    </Card.Content>
+
+    <Card.Content>
+      {isAuthenticated ? (
+        <BuyProduct
+          item={item}
+          productInfo={{ description, img, name, price, currency }}
+        />
+      ) : (
+        <Button  as={Link} to="/login" className="buyBtn">
+          BUY
+        </Button>
+      )}
+    </Card.Content>
+  </Card>
+        }
+
+    </>
+
   );
 }
 

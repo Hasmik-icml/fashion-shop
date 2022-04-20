@@ -23,7 +23,7 @@ const Cards = () => {
     <>
     <div className="ui stackable three column grid productItems"> 
       {productsByPage && productsByPage.length > 0 && productsByPage.map((item) => {
-        return (
+        return (    
           <CardItem
             item={item}
             key={item.id}
@@ -32,6 +32,7 @@ const Cards = () => {
             name={item.name}
             price={item.price}
             currency={item.currency}
+            stock={item.stock.count}
           />
         );
       })}
