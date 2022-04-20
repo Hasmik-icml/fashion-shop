@@ -1,11 +1,5 @@
-import React, { useEffect,useState } from "react";
+import React from "react";
 import { Form, Input,Radio } from 'semantic-ui-react'
-
-const options = [
-  { key: "m", text: "Male", value: "male" },
-  { key: "f", text: "Female", value: "female" },
-  { key: "o", text: "Other", value: "other" },
-];
 
 const FormFieldError = ({userName,changeOptions}) => {
   function handleChange(event){
@@ -45,7 +39,6 @@ const FormFieldError = ({userName,changeOptions}) => {
             value='cash'
             checked={true}
             onChange = {(e)=>handleChange(e)}
-            
           />
         </Form.Field>
         <Form.Field>

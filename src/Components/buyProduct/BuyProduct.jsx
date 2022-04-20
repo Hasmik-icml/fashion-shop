@@ -6,7 +6,7 @@ import logo from "../../logoNavBar.jpg";
 import { confirmOrder } from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
 
-function BuyProduct({ productInfo, item, statusForStock }) {
+function BuyProduct({ productInfo, item, stock }) {
 
     const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
       useAuth0();
@@ -45,7 +45,8 @@ function BuyProduct({ productInfo, item, statusForStock }) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button className="buyBtn modalBuyBtn" disabled={statusForStock} >
+          
+          <Button className="buyBtn modalBuyBtn" disabled={stock < 1 ? true : false} >
             BUY
           </Button>
         }

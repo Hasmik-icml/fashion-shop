@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import logo from "../../logoNavBar.jpg";
 
 function CardItem({ description, img, name, price, item, currency, stock }) {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
 
   return (
     <>
@@ -27,18 +27,25 @@ function CardItem({ description, img, name, price, item, currency, stock }) {
       </Card.Content>
 
       <Card.Content>
-        {isAuthenticated && stock < 1 ?(        
-          <BuyProduct
-          statusForStock={true} 
+        {isAuthenticated ?
+        (   
+         <BuyProduct
+            stock={stock} 
             item={item}
             productInfo={{ description, img, name, price, currency }}
           />
         ) : (
-          <Button as={Link} to="/login" className="buyBtn">
-            BUY
-          </Button>
-        )}
+          <Button onClick={loginWithRedirect} text="login" className="buyBtn">  BUY</Button>
+          // <Button as={Link} to="/login" className="buyBtn">
+          
+          // </Button>
+        )
+        
+        
+        }
       </Card.Content>
+
+
     </Card>
 
     </>
