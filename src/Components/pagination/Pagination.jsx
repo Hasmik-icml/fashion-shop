@@ -6,14 +6,14 @@ const pageDivider = 3;
 const [start, setStart] = useState(0);
 
 function goToPage(e, data) {
-  console.log("data.activePage + result " , data.activePage , result);
+  
   setStart(data.activePage * pageDivider - pageDivider);
 }
 
 useEffect(() => {
-  getProductsByPage(result.slice(start, start + pageDivider));
+  if(result) getProductsByPage(result.slice(start, start + pageDivider));
 }, [start, result]); 
-
+console.log("result " ,  result);
     return(
      <>
       {result && result.length > pageDivider ? 
