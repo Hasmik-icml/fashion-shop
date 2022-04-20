@@ -8,23 +8,21 @@ import Paginations from "../pagination/Pagination";
 
 function UserOrdersTable({list}){
   console.log("list tabsi hamar ", list);
-  // const [result, setResult] = useState([]);
-  // const [productsByPage, setProductsByPage] = useState([]);
+  const [result, setResult] = useState([]);
 
   // function getProductsByPage(productsByPage){
   //   setProductsByPage(productsByPage)
   // }
 
-  // useEffect(() =>{
-  //   if (list && list.length > 0) setResult(list)
-  // }, [productsByPage, list])
+  useEffect(() =>{
+    if (list && list.length > 0) setResult(list)
+  }, [list])
 
-  // console.log("productsByPage ", productsByPage);
   return(
     <>
-    {list &&
-      list.length > 0 &&
-      list.map((item) => {
+    {result &&
+      result.length > 0 &&
+      result.map((item) => {
         return (
             <Popup
             inverted
@@ -67,8 +65,8 @@ function UserOrdersTable({list}){
             </Grid>
             }
             
-            />
-        );
+            />   
+        );     
       })}
        {/* <Paginations result={result} getProductsByPage={getProductsByPage}/> */}
   </>
