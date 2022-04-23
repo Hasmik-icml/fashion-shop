@@ -1,12 +1,13 @@
 import "./header.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createMedia } from "@artsy/fresnel";
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
-import { Icon, Image, Menu, Sidebar, Dropdown } from "semantic-ui-react";
+import { Icon, Image, Menu, Sidebar, Dropdown, Button } from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../../logo.png";
 import { nanoid } from 'nanoid';
+import { isUserExists, authoriseUser } from "../../Services/api";
 
 const AppMedia = createMedia({
   breakpoints: {
@@ -23,19 +24,19 @@ const { Media, MediaContextProvider } = AppMedia;
 const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems, visible }) => {
   return (
     <Sidebar.Pushable>
-      <Sidebar
-      key={nanoid()}
-        as={Menu}
-        animation="overlay"
-        icon="labeled"
-        inverted
-        items={leftItems}
-        vertical
-        visible={visible}
-      />
+ <Sidebar.Pusher id="left-pusher" dimmed={visible} onClick={onPusherClick}>
+        <Sidebar
+        key={nanoid()}
+          as={Menu}
+          animation="overlay"
+          icon="labeled"
+          inverted
+          items={leftItems}
+          vertical
+          visible={visible}
+        />
+    </Sidebar.Pusher>
       <Sidebar.Pusher
-        dimmed={visible}
-        onClick={onPusherClick}
       >
         <Menu fixed="top" inverted>
           <Menu.Item>
@@ -54,7 +55,7 @@ const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems
                   </Menu.Item>
                 );
               }
-              return <Menu.Item key={index} {...item.link} />;
+              return item ;
             })}
           </Menu.Menu>
         </Menu>
@@ -64,7 +65,7 @@ const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems
   );
 };
 
-const NavBarDesktop = ({ leftItems, rightItems }) => {
+const NavBarDesktop = ({leftItems, rightItems }) => {
   return (
     <>
       <Menu fixed="top" inverted>
@@ -75,7 +76,8 @@ const NavBarDesktop = ({ leftItems, rightItems }) => {
         {leftItems.map((item) => (
           <Menu.Item {...item} />
         ))}
-        <Menu.Menu position="right" key="rightItems">
+        
+        <Menu.Menu position="right" key={nanoid()}>
           {rightItems.map((item, index) => {
             if (item.children) {
               return (
@@ -84,7 +86,7 @@ const NavBarDesktop = ({ leftItems, rightItems }) => {
                 </Menu.Item>
               );
             }
-            return <Menu.Item key={index} {...item.link} />;
+            return item;
           })}
         </Menu.Menu>
       </Menu>
@@ -118,22 +120,20 @@ function NavBar({ leftItems, rightItems }) {
     </div>
   );
 }
-// }
 
 const leftItems = [
   { as: Link, to: "/", content: "Home", key: "home" },
   { as: Link, to: "/Products", content: "Products", key: "products" },
-  // { as: Link, to: "/Reviews", content: "Reviews", key: "reviews" },
 ];
 
 const rightItems = [
-  { as: Link, to: "/login", content: "Login", key: "login" },
-  // { as: Link, to:"/register", content: "Register", key: "register" }
 ];
 
 function Header() {
-  const { user, isAuthenticated, logout } = useAuth0();
+  const { user, isAuthenticated, logout, loginWithRedirect, getAccessTokenSilently} = useAuth0();
+
   rightItems.length = 0;
+
   if (isAuthenticated) {
     console.log(user);
     rightItems.push({
@@ -159,10 +159,28 @@ function Header() {
       ],
     }); 
   } else { 
-    rightItems.push({
-      link: { as: Link, to: "/login", content: "Login", key: "login" },
-    });
+    rightItems.push(
+     <Menu.Item onClick={loginWithRedirect}  text="login" key={nanoid()}>LogIn</Menu.Item>
+    );
   }
+  console.log("rightItems  ", rightItems)
+useEffect(()=>{
+  (async function(){
+    if(isAuthenticated && localStorage.getItem("authoriseUser") === user.nickname) {
+      let authorised;
+      const isExists = await isUserExists(user.sub)
+      if(!isExists || (isExists.httpStatus === "OK" && !isExists.info.exists)) {
+        const token = await getAccessTokenSilently();
+        authorised = await authoriseUser(user, token);
+      }
+      if (authorised && authorised.httpStatus === "OK" || isExists){
+        localStorage.setItem("authoriseUser", user.nickname);
+      }
+    }
+  })()
+
+}, [isAuthenticated])
+
   return (
     <MediaContextProvider>
       <NavBar leftItems={leftItems} rightItems={rightItems}></NavBar>
