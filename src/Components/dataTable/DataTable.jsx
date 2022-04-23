@@ -2,25 +2,34 @@ import "./dataTable.css";
 import logo from "../../logoNavBar.jpg";
 import { List, Grid, Segment, Image, Icon,Input } from "semantic-ui-react";
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import AddProduct from "../products/AddProduct";
+
 
 function DataTable({ list, uploadImg }) {
   const [imgFile, setImgFile] = useState();
-  console.log("list", list);
-  function onChange(e) {
-    console.log(e.target.files);
+  const [result, setResult] = useState([]);
+  // console.log("list", list);
+  const selectedId = useRef(null);
+
+  function onChange(e, id) {
+    selectedId.current = id
     setImgFile(e.target.files[0]);
   }
+  useEffect(() =>{
+    setResult(list)
+   }, [list])
+
   useEffect(() => {
-    console.log("imgFile ", imgFile);
+    // console.log("imgFile ", imgFile);
   }, [imgFile]);
+  
   return (
     <div>
-      {list &&
-        list.length > 0 &&
-        list.map((item) => {
-          console.log(item);
+      {result &&
+        result.length > 0 &&
+        result.map((item) => {
+          // console.log(item);
           return (
          
               <Grid className="grid-table" key={nanoid()}>

@@ -24,7 +24,7 @@ const { Media, MediaContextProvider } = AppMedia;
 const NavBarMobile = ({ children, leftItems, onPusherClick, onToggle, rightItems, visible }) => {
   return (
     <Sidebar.Pushable>
- <Sidebar.Pusher id="left-pusher" dimmed={visible} onClick={onPusherClick}>
+    <Sidebar.Pusher id="left-pusher" dimmed={visible} onClick={onPusherClick}>
         <Sidebar
         key={nanoid()}
           as={Menu}

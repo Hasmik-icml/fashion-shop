@@ -10,7 +10,7 @@ console.log("tabsi meji orderList=", orderList);
 const [result, setResult] = useState([]);
 const [userData, setUserData] = useState({});
 const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = userData;
-const [productsByPage, setProductsByPage] = useState([]);
+const [ordersByPage, setOrdersByPage] = useState([]);
 
     function userPendingsOrders(orderList){
         return orderList.filter(item => item.orderStatus === "PENDING").sort((a,b) => b.date - a.date);
@@ -29,9 +29,9 @@ const [productsByPage, setProductsByPage] = useState([]);
     }
    
   
-    function getProductsByPage(productsByPage){
-        console.log("funkciai meji log" , productsByPage);
-      setProductsByPage(productsByPage)
+    function getOrdersByPage(ordersByPage){
+        console.log("funkciai meji log" , ordersByPage);
+        setOrdersByPage(ordersByPage)
     }
 
     useEffect(()=>{
@@ -54,16 +54,16 @@ const [productsByPage, setProductsByPage] = useState([]);
       if (orderList && orderList.length > 0) setResult(orderList)
     }, [ orderList])
   
-    console.log("tabsi meji productsByPage = ", productsByPage);
-    console.log("tabsi meji pendings = ", pendingsOrders);
+    console.log("user tabsi meji ordersByPage = ", ordersByPage);
+    console.log("user tabsi meji pendings = ", pendingsOrders);
     const panes = [
         {
             menuItem: "Pending",
             render: () => (
               <>
                 <Tab.Pane>
-                <UserOrdersTable list={productsByPage}/>
-                <Paginations result={pendingsOrders} getProductsByPage={getProductsByPage}/>
+                <UserOrdersTable list={ordersByPage}/>
+                <Paginations result={pendingsOrders} getOrdersByPage={getOrdersByPage}/>
                 </Tab.Pane>
               </>
             )
@@ -73,9 +73,9 @@ const [productsByPage, setProductsByPage] = useState([]);
             render: () => (
                 <>
                 <Tab.Pane>
-                    <UserOrdersTable list={productsByPage}/>
+                    <UserOrdersTable list={ordersByPage}/>
                 </Tab.Pane>
-                <Paginations result={unpaidOrders} getProductsByPage={getProductsByPage}/>
+                <Paginations result={unpaidOrders} getOrdersByPage={getOrdersByPage}/>
                 </>
             )
         },
@@ -84,9 +84,9 @@ const [productsByPage, setProductsByPage] = useState([]);
             render: () => (
              <>
                 <Tab.Pane>
-                    <UserOrdersTable list={productsByPage}/>
+                    <UserOrdersTable list={ordersByPage}/>
                 </Tab.Pane>
-                 <Paginations result={sentOrders} getProductsByPage={getProductsByPage}/>
+                 <Paginations result={sentOrders} getOrdersByPage={getOrdersByPage}/>
              </>
             )
         },
@@ -95,9 +95,9 @@ const [productsByPage, setProductsByPage] = useState([]);
             render: () => (
                 <>                
                 <Tab.Pane>
-                    <UserOrdersTable list={productsByPage} />
+                    <UserOrdersTable list={ordersByPage} />
                 </Tab.Pane>
-                <Paginations result={paidOrders} getProductsByPage={getProductsByPage}/>
+                <Paginations result={paidOrders} getOrdersByPage={getOrdersByPage}/>
                 </>
             )
         },
@@ -106,9 +106,9 @@ const [productsByPage, setProductsByPage] = useState([]);
             render: () => (
                 <>                
                 <Tab.Pane>
-                    <UserOrdersTable list={productsByPage} />
+                    <UserOrdersTable list={ordersByPage} />
                 </Tab.Pane>
-                <Paginations result={doneOrders} getProductsByPage={getProductsByPage}/>
+                <Paginations result={doneOrders} getOrdersByPage={getOrdersByPage}/>
                 </>
             )
         },

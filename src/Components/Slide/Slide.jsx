@@ -12,7 +12,6 @@ function Slides({ slides }) {
 
      (index !== 0) ? setIndex(--index) : setIndex(slides.length-1);
      console.log(" i em prev index", index)
-
   }
 
   function showNext(){
@@ -22,12 +21,12 @@ function Slides({ slides }) {
 
    }
 
-   function restart(){
+  //  function restart(){
      
-    setIndex(0);
-    console.log("Restart ", index);
+  //   setIndex(0);
+  //   console.log("Restart ", index);
 
-   }
+  //  }
 
   return (
     <div>

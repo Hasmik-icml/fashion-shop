@@ -91,14 +91,14 @@ function Dashboard() {
     if (user || responseInfo.length > 0) orderShow();
   }, [user, responseInfo]);
 
-  async function changeStatus(status, order_id) {
+  async function changeStatus(status, order_id) {//done , 14
     try {
       const token = await getAccessTokenSilently();
       const changeResult = await changeOrderStatus(
         user.sub,
         token,
-        order_id,
-        status
+        order_id,//14
+        status//done
       );
       console.log("changeResult", changeResult);
       orderShow();
@@ -132,6 +132,7 @@ function Dashboard() {
   console.log("allDoneOrders ", allDoneOrders);
   console.log("allOrder ", allOrders);
   console.log("orderList", orderList);
+
   return (
       <div className="dashboard ui container">
       {responseInfo.length > 0 && responseInfo === "something went wrong" ? (
@@ -157,6 +158,7 @@ function Dashboard() {
             allDoneOrders={allDoneOrders}
             allProducts={allProducts}
             changeStatus={changeStatus}
+            adminData={adminData}
           />
         </>
       ) : (
@@ -169,3 +171,4 @@ function Dashboard() {
   );
 }
 export default Dashboard;
+
