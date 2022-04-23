@@ -30,6 +30,7 @@ import UserOrdersTabs from "../Tabs/UserOrdersTabs";
 function Dashboard() {
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
     useAuth0();
+    console.log(user);
   const [orderList, setOrderList] = useState([]);
 
   const [adminData, setAdminData] = useState({});

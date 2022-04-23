@@ -6,14 +6,15 @@ const pageDivider = 3;
 const [start, setStart] = useState(0);
 
 function goToPage(e, data) {
-  
   setStart(data.activePage * pageDivider - pageDivider);
 }
 
 useEffect(() => {
   if(result) getProductsByPage(result.slice(start, start + pageDivider));
 }, [start, result]); 
+
 console.log("result " ,  result);
+
     return(
      <>
       {result && result.length > pageDivider ? 
@@ -32,4 +33,5 @@ console.log("result " ,  result);
      </>
     )
 }
+
 export default Paginations;

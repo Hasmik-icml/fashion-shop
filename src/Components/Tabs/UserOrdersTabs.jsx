@@ -10,6 +10,7 @@ console.log("tabsi meji orderList=", orderList);
 const [result, setResult] = useState([]);
 const [userData, setUserData] = useState({});
 const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = userData;
+const [productsByPage, setProductsByPage] = useState([]);
 
     function userPendingsOrders(orderList){
         return orderList.filter(item => item.orderStatus === "PENDING").sort((a,b) => b.date - a.date);
@@ -26,6 +27,12 @@ const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = user
     function userDoneOrders(orderList){
         return orderList.filter(item => item.orderStatus === "DONE").sort((a,b) => b.date - a.date);
     }
+   
+  
+    function getProductsByPage(productsByPage){
+        console.log("funkciai meji log" , productsByPage);
+      setProductsByPage(productsByPage)
+    }
 
     useEffect(()=>{
         setUserData((userData) => ({
@@ -41,12 +48,7 @@ const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = user
     console.log("result " ,result);
     console.log("userData " ,userData);
 
-    const [productsByPage, setProductsByPage] = useState([]);
-  
-    function getProductsByPage(productsByPage){
-        console.log("funkciai meji log" , productsByPage);
-      setProductsByPage(productsByPage)
-    }
+
 
     useEffect(() =>{
       if (orderList && orderList.length > 0) setResult(orderList)
@@ -112,7 +114,7 @@ const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = user
         },
     ]
     return (
-        <Tab panes={panes}/>
+        <Tab  className="mainTabs"  panes={panes}/>
     )
 }
 export default UserOrderTabs;

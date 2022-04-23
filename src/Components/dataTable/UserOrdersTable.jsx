@@ -6,11 +6,10 @@ import "./dataTable.css";
 
 
 function UserOrdersTable({list}){
-  console.log("list tabsi hamar ", list);
   const [result, setResult] = useState([]);
 
   useEffect(() =>{
-    if (list && list.length > 0) setResult(list)
+   setResult(list)
   }, [list])
 
   return(
@@ -22,7 +21,7 @@ function UserOrdersTable({list}){
             <Popup
             inverted
             content={new Date(item.date).toString()}
-            key={item.name}
+            key={nanoid()}
             header={item.user.name}
             className="tooltip"
             trigger={
