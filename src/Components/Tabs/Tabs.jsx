@@ -66,7 +66,7 @@ function Tabs({uploadImg, pendingOrders, sentOrders, paidOrders, unpaidOrders, a
   ];
   return (
 <> 
-    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} />
+    <Tab className="mainTabs"  menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} />
 </>
   );
 };

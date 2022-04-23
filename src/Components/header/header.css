@@ -3,18 +3,48 @@
 }
 
 .customHeader, .pusher{
-    height: 60px;
+  position: relative;
+    z-index: 101;
+    height: 80px;
     
 }
 .logoIcon{
     cursor: pointer;
 }
- .pushable {
+
+.pushable {
     overflow-x: visible;
-    }
-#slide{
-    /* z-index: -1; */
+} 
+   
+.log{
+    width: 500px;
 }
-.slideImg{
-    z-index: -1;
+
+.ui.fixed.menu.top,
+.ui.sidebar.menu {
+    background-color: #8a7476;
+}
+
+.customHeader {
+  height: 60px;
+}
+
+#left-pusher.pusher {
+  height: 100%;
+}
+
+.customHeader .pushable {
+  position: fixed;
+  z-index: 101;
+  margin: 0;
+  width: 100%;
+  height: auto;
+  overflow-x: visible;
+}
+
+#left-pusher .menu {
+  top: 60px;
+  width: 120px;
+  height: auto !important;
+  max-height: inherit;
 }
