@@ -1,0 +1,15 @@
+.ui.inverted.segment {
+    background-color:  #8a7476;
+  }
+  
+  .six.wide.column,
+  .four.wide.column {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .footer{
+    position: absolute;
+    bottom:-35em;
+    width: 100%;
+}
+

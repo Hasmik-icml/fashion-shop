@@ -1,17 +1,18 @@
 import { Pagination } from "semantic-ui-react";
 import {useEffect, useState} from "react"
 
-function Paginations({result, getProductsByPage, getOrdersByPage, updateStart}){
+function Paginations({result, getProductsByPage, getOrdersByPage}){
+  // debugger;
 const pageDivider = 3;
 const [start, setStart] = useState(0);
-
+console.log("start = ", start);
 function goToPage(e, data) {
   setStart(data.activePage * pageDivider - pageDivider);
 }
 
 useEffect(()=> {
-  setStart(0)
-}, [updateStart])
+ setStart(0)
+}, [getProductsByPage, getProductsByPage])
 
 useEffect(() => {
   if(result && getProductsByPage) getProductsByPage(result.slice(start, start + pageDivider));
@@ -28,7 +29,7 @@ console.log("result " ,  result);
       {result && result.length > pageDivider ? 
         <Pagination
         boundaryRange={0}
-        defaultActivePage={start}
+        defaultActivePage={1}
         ellipsisItem={null}
         firstItem={null}
         lastItem={null}

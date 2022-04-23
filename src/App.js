@@ -23,7 +23,7 @@ function App() {
           <Route path="/products" element={<Products />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </div>
 }
     </BrowserRouter>
