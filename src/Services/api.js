@@ -114,6 +114,7 @@ export async function authoriseUser(user, token) {
 export async function confirmOrder(user, product, token, option) {
     const {sub: id,name,email,picture} = user;
     const {address,paymentMethod,phone} = option;
+    
 
     const body = {
         date: new Date().valueOf(),

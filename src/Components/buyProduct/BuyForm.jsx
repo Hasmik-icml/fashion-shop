@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input,Radio } from 'semantic-ui-react'
 
 const FormFieldError = ({userName,changeOptions}) => {
+  
   function handleChange(event){
     changeOptions({[event.target.name]:event.target.value});
   }

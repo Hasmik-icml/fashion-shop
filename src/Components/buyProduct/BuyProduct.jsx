@@ -6,7 +6,7 @@ import logo from "../../logoNavBar.jpg";
 import { confirmOrder } from "../../Services/api";
 import { useAuth0 } from "@auth0/auth0-react";
 
-function BuyProduct({ productInfo, item, stock }) {
+function BuyProduct({ productInfo, item, setResponseInfo, stock }) {
 
     const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
       useAuth0();
@@ -16,6 +16,7 @@ function BuyProduct({ productInfo, item, stock }) {
     const [open, setOpen] = useState(false);
     const inintFormData = { address: "", phone: "", paymentMethod: "cash" };
     const [options, setOptions] = useState(inintFormData);
+    const [disable, setDisable] = useState(true);
 
     async function confirmAction() {
       try {
@@ -27,15 +28,42 @@ function BuyProduct({ productInfo, item, stock }) {
           picture: user.picture,
         };
         const orderStatus = await confirmOrder(userObj, item, token, options);
+
         console.log(orderStatus);
       } catch (error) {
         console.log(error);
       }
     }
 
+    useEffect(() => {
+      if (open === false) {
+        resetOptions();
+      }
+
+      let status = false;
+      for (let key in options) {
+         console.log(options[key]);
+        if (!options[key] && key !== "paymentMethod") {
+          
+          status = true;
+        }
+      }
+     
+      setDisable(status);
+    }, [options, open]);
+    
+  
+    function resetOptions() {
+      for (let key in options) {
+        if (key != "paymentMethod") {
+          options[key] = "";
+        }
+      }
+    }
+  
+
     function changeOptions(prop) {
       console.log("prop",prop);
-      
       setOptions({ ...options, ...prop });
     }
     return (
@@ -45,7 +73,6 @@ function BuyProduct({ productInfo, item, stock }) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          
           <Button className="buyBtn modalBuyBtn" disabled={stock < 1 ? true : false} >
             BUY
           </Button>
@@ -83,10 +110,12 @@ function BuyProduct({ productInfo, item, stock }) {
               <Button 
                 className="buyBtn"
                 content="Confirm"
+                disabled={disable}
                 labelPosition="right"
                 icon="checkmark"
                 onClick={() => {
                   setOpen(false);
+                  setDisable(true);
                   confirmAction();
                 }}
                 positive
