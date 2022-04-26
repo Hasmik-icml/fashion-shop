@@ -164,12 +164,13 @@ function Header() {
     );
   }
   console.log("rightItems  ", rightItems)
+
 useEffect(()=>{
   (async function(){
-    if(isAuthenticated && localStorage.getItem("authoriseUser") === user.nickname) {
+    if(isAuthenticated && localStorage.getItem("authoriseUser") !== user.nickname) {
       let authorised;
       const isExists = await isUserExists(user.sub)
-      if(!isExists || (isExists.httpStatus === "OK" && !isExists.info.exists)) {
+      if(!isExists || (Array.isArray(isExists) && isExists.length ==0) || (isExists.httpStatus === "OK" && isExists.info.exists !== 'false')) {
         const token = await getAccessTokenSilently();
         authorised = await authoriseUser(user, token);
       }
