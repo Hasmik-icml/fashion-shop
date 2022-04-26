@@ -24,3 +24,9 @@
 .ui.card>.content>.description{
     color: rgb(193, 193, 193);
 }
+.ui.card>.image{
+    width: 250px;
+}
+.ui.card .content img{
+    height: 200px;
+}

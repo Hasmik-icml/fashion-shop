@@ -37,7 +37,6 @@ function Footer(){
               <Icon name='phone square'/>
               +374 93128755
               </Grid.Column>
-
               
             </Grid.Row>
           </Grid>

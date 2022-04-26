@@ -11,6 +11,7 @@ const [result, setResult] = useState([]);
 const [userData, setUserData] = useState({});
 const {pendingsOrders, unpaidOrders, sentOrders, paidOrders, doneOrders } = userData;
 const [ordersByPage, setOrdersByPage] = useState([]);
+const [tabIndex, setTabIndex] =useState(0);
 
     function userPendingsOrders(orderList){
         return orderList.filter(item => item.orderStatus === "PENDING").sort((a,b) => b.date - a.date);
@@ -53,9 +54,7 @@ const [ordersByPage, setOrdersByPage] = useState([]);
     useEffect(() =>{
       if (orderList && orderList.length > 0) setResult(orderList)
     }, [ orderList])
-  
-    console.log("user tabsi meji ordersByPage = ", ordersByPage);
-    console.log("user tabsi meji pendings = ", pendingsOrders);
+ 
     const panes = [
         {
             menuItem: "Pending",
@@ -63,7 +62,7 @@ const [ordersByPage, setOrdersByPage] = useState([]);
               <>
                 <Tab.Pane>
                 <UserOrdersTable list={ordersByPage}/>
-                <Paginations result={pendingsOrders} getOrdersByPage={getOrdersByPage}/>
+                <Paginations result={pendingsOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
                 </Tab.Pane>
               </>
             )
@@ -75,7 +74,7 @@ const [ordersByPage, setOrdersByPage] = useState([]);
                 <Tab.Pane>
                     <UserOrdersTable list={ordersByPage}/>
                 </Tab.Pane>
-                <Paginations result={unpaidOrders} getOrdersByPage={getOrdersByPage}/>
+                <Paginations result={unpaidOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
                 </>
             )
         },
@@ -86,7 +85,7 @@ const [ordersByPage, setOrdersByPage] = useState([]);
                 <Tab.Pane>
                     <UserOrdersTable list={ordersByPage}/>
                 </Tab.Pane>
-                 <Paginations result={sentOrders} getOrdersByPage={getOrdersByPage}/>
+                 <Paginations result={sentOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
              </>
             )
         },
@@ -97,7 +96,7 @@ const [ordersByPage, setOrdersByPage] = useState([]);
                 <Tab.Pane>
                     <UserOrdersTable list={ordersByPage} />
                 </Tab.Pane>
-                <Paginations result={paidOrders} getOrdersByPage={getOrdersByPage}/>
+                <Paginations result={paidOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
                 </>
             )
         },
@@ -108,13 +107,13 @@ const [ordersByPage, setOrdersByPage] = useState([]);
                 <Tab.Pane>
                     <UserOrdersTable list={ordersByPage} />
                 </Tab.Pane>
-                <Paginations result={doneOrders} getOrdersByPage={getOrdersByPage}/>
+                <Paginations result={doneOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
                 </>
             )
         },
     ]
     return (
-        <Tab  className="mainTabs"  panes={panes}/>
+        <Tab  className="mainTabs" onTabChange={(e, activeIndex)=>{setTabIndex(activeIndex)}} panes={panes}/>
     )
 }
 export default UserOrderTabs;

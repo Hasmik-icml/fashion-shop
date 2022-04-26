@@ -9,7 +9,7 @@
   }
   .footer{
     position: absolute;
-    bottom:-35em;
+    /* bottom:-35em; */
     width: 100%;
 }
 

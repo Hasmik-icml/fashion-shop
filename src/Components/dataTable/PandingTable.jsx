@@ -57,16 +57,14 @@ function PendingTable({ list, changeStatus, tabName }) {
                       <Segment.Inline>
                         <List.Content>
                           <List.Header>{item.product.name} </List.Header>
-                          {item.product.price}
+                          {item.product.price} {item.product.currency}
                         </List.Content>
                       </Segment.Inline>
                     </Grid.Column>
 
                     <Grid.Column width="2">
                       <Segment.Inline>{item.orderStatus}</Segment.Inline>
-                    </Grid.Column>
-
-                    <Grid.Column width="2">
+                      <Grid.Column width="2">
                       <Segment.Inline>
                         {tabName === "DONE" ? (
                           <Dropdown
@@ -141,15 +139,13 @@ function PendingTable({ list, changeStatus, tabName }) {
                         )}
                       </Segment.Inline>
                     </Grid.Column>
-                    <Grid.Column width="2">
-                      <Dropdown pointing="top left" text="Details">
-                        <Dropdown.Menu className="details ">
-                          <Dropdown.Item
-                            text={item.address + " " + item.phone}
-                          />
-                        </Dropdown.Menu>
-                      </Dropdown>
                     </Grid.Column>
+   
+                    <Grid.Column width="5">
+                      <Segment.Inline>{item.phone}</Segment.Inline>
+                      <Segment.Inline>{item.address}</Segment.Inline>
+                    </Grid.Column>
+
                   </Grid.Row>
                 </Grid>
               }

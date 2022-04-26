@@ -6,7 +6,6 @@ import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import Products from "./Components/products/products.jsx";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import LoginPage from "./Components/Login/Loginbutton.jsx";
-import { Parent } from "./Components/UseContext.jsx";
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from "./Components/Loading/Loading.jsx";
 

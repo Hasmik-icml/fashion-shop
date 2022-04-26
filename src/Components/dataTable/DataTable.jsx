@@ -48,7 +48,7 @@ function DataTable({ list, uploadImg }) {
                     </Segment.Inline>
                   </Grid.Column>
 
-                  <Grid.Column width="2">
+                  <Grid.Column width="4">
                     <Segment.Inline>
                       <List.Header>{item.name} </List.Header>
                       <div className="price">
@@ -57,7 +57,7 @@ function DataTable({ list, uploadImg }) {
                     </Segment.Inline>
                   </Grid.Column>
 
-                  <Grid.Column width="6">
+                  <Grid.Column width="4">
                     <Segment.Inline>
                       <List.Content>
                         <Segment.Inline>{item.orderStatus}</Segment.Inline>

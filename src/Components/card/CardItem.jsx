@@ -12,15 +12,17 @@ function CardItem({ description, img, name, price, item, currency, stock }) {
   return (
     <>
     <Card centered>
-      <Image className="cardImg"
+    <Card.Content className="product-img">
+    <Image className="cardImg"
         src={img.length > 0 && img[0].imagePath ? img[0].imagePath : logo}
       />
+    </Card.Content>
       <Card.Content>
         <Card.Header>{name}</Card.Header>
         <Card.Content>
           {price} {currency}
         </Card.Content>
-        <Card.Description>{description}</Card.Description>
+        {/* <Card.Description>{description}</Card.Description> */}
         <Card.Content>
         {`In Stock ${stock}`}
         </Card.Content>

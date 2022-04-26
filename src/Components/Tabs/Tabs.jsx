@@ -10,15 +10,16 @@ function Tabs({uploadImg, changeStatus, adminData}){
   const [productsByPage, setProductsByPage] = useState([]);
   const [ordersByPage, setOrdersByPage] = useState([]);
   const [orderData, setOrderData] = useState({});
+  const [tabIndex, setTabIndex] =useState(0);
+  console.log("tabIndex=", tabIndex.activeIndex);
+
 
 
 function getProductsByPage(productsByPage){
-  console.log("funkciai meji log" , productsByPage);
   setProductsByPage(productsByPage)
 }
 
 function getOrdersByPage(ordersByPage){
-  console.log("funkciai meji log" , ordersByPage);
   setOrdersByPage(ordersByPage)
 }
 const {allProducts, pendingOrders, unpaidOrders, sentOrders, paidOrders, allDoneOrders, allOrders } = orderData;
@@ -28,9 +29,6 @@ useEffect(()=>{
 
   if(adminData) setOrderData(adminData)
 }, [adminData])
-
- console.log("orderData=", allOrders);
- console.log("unpaidOrders=", unpaidOrders);
  
   const panes = [
     {
@@ -38,11 +36,11 @@ useEffect(()=>{
       render: () => (
    
       <>
-           {console.log("productsByPage", productsByPage)}
-        <Tab.Pane>
+        <Tab.Pane >
           <DataTable list = {productsByPage} uploadImg={uploadImg}/>
         </Tab.Pane>
-          <Paginations result={allProducts} updateStart={1}  getProductsByPage={getProductsByPage}/>
+        <Paginations result={allProducts} tabIndex={tabIndex}  getProductsByPage={getProductsByPage}/>
+          
       </>
       )
     },
@@ -50,12 +48,11 @@ useEffect(()=>{
         menuItem: "All Orders", 
         render: () =>(
           <>
-          {console.log("productsByPage", productsByPage)}
-          <Tab.Pane>
+          <Tab.Pane >
           <PendingTable list = {ordersByPage} changeStatus = {changeStatus} />
           </Tab.Pane> 
-
-          <Paginations result={allOrders} updateStart={1} getOrdersByPage={getOrdersByPage}/>
+           <Paginations result={allOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
+          
           </>
         ) 
     },
@@ -63,11 +60,10 @@ useEffect(()=>{
       menuItem: "Pending", 
       render: () =>(
         <>
-          {console.log("productsByPage", productsByPage)}
         <Tab.Pane>
         <PendingTable list = {ordersByPage} changeStatus = {changeStatus} />
         </Tab.Pane> 
-        <Paginations result={pendingOrders} getOrdersByPage={getOrdersByPage}/>
+        <Paginations result={pendingOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
         </>
       ) 
   },
@@ -75,11 +71,10 @@ useEffect(()=>{
       menuItem: "UNPAID orders", 
       render: () =>(
      <>
-       {console.log("productsByPage", productsByPage)}
         <Tab.Pane>
         <PendingTable list = {ordersByPage} changeStatus = {changeStatus} />
         </Tab.Pane> 
-        <Paginations result={unpaidOrders} getOrdersByPage={getOrdersByPage}/>
+        <Paginations result={unpaidOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
      </>
       ) 
     },
@@ -87,11 +82,10 @@ useEffect(()=>{
       menuItem: "SENT", 
       render: () =>(
         <>
-          {console.log("productsByPage", productsByPage)}
-        <Tab.Pane>
+        <Tab.Pane >
         <PendingTable list = {ordersByPage} changeStatus = {changeStatus} />
         </Tab.Pane> 
-         <Paginations result={sentOrders} getOrdersByPage={getOrdersByPage}/>
+         <Paginations result={sentOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
         </>
       ) 
     },
@@ -99,11 +93,10 @@ useEffect(()=>{
       menuItem: "PAID", 
       render: () =>(
         <>
-          {console.log("productsByPage", productsByPage)}
           <Tab.Pane>
         <PendingTable list = {ordersByPage} changeStatus = {changeStatus} />
         </Tab.Pane> 
-         <Paginations result={paidOrders} getOrdersByPage={getOrdersByPage}/>
+         <Paginations result={paidOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
         </>
       ) 
     },
@@ -114,14 +107,14 @@ useEffect(()=>{
         <Tab.Pane>
         <PendingTable list = {ordersByPage} changeStatus = {changeStatus} tabName={"DONE"} />
         </Tab.Pane> 
-        <Paginations result={allDoneOrders} getOrdersByPage={getOrdersByPage}/>
+        <Paginations result={allDoneOrders} tabIndex={tabIndex} getOrdersByPage={getOrdersByPage}/>
        </>
       ) 
     },
   ];
   return (
 <> 
-    <Tab className="mainTabs"  menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} />
+    <Tab className="mainTabs"  onTabChange={(e, activeIndex)=>{setTabIndex(activeIndex)}} menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} />
 </>
   );
 };
