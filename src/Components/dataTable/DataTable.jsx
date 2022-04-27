@@ -21,9 +21,14 @@ function DataTable({ list, uploadImg }) {
    }, [list])
 
   useEffect(() => {
-    // console.log("imgFile ", imgFile);
+
   }, [imgFile]);
   
+  useEffect(() => {
+    selectedId.current = null;
+ 
+  }, [result]);
+
   return (
     <div>
       {result &&
@@ -67,18 +72,20 @@ function DataTable({ list, uploadImg }) {
                             uploadImg(imgFile, item.id);
                           }}
                         >
-                          <label className="upload" htmlFor ="file-input">
+                          <label className="upload" htmlFor ={`file-input-${item.id}`}>
                           <Icon className="iconUpload" name="images" />
                           </label>
                           <input
-                            id = "file-input"
+                              id={`file-input-${item.id}`}
                             className="upload imgBtn"
                             type="file"
-                            onChange={(e)=>onChange(e)}
+                            onChange={(e)=>onChange(e, item.id)}
                           ></input>
                          
                           <button type="submit" className="upload">
-                          <Icon className="upload iconUpload" name="upload" />
+                          <Icon className="upload iconUpload" name="upload" color={
+                            selectedId.current === item.id ? "red" : "grey"
+                          }/>
                           </button>
                         </form>
                       </List.Content>
