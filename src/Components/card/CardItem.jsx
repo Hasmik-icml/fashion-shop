@@ -35,6 +35,7 @@ function CardItem({ description, img, name, price, item, currency, stock }) {
             stock={stock} 
             item={item}
             productInfo={{ description, img, name, price, currency }}
+      
           />
         ) : (
           <Button onClick={loginWithRedirect} text="login" className="buyBtn">BUY</Button>

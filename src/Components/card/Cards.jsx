@@ -33,6 +33,7 @@ const Cards = () => {
             price={item.price}
             currency={item.currency}
             stock={item.stock.count}
+      
           />
         );
       })}

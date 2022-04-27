@@ -91,14 +91,14 @@ function Dashboard() {
     if (user || responseInfo.length > 0) orderShow();
   }, [user, responseInfo]);
 
-  async function changeStatus(status, order_id) {//done , 14
+  async function changeStatus(status, order_id) {
     try {
       const token = await getAccessTokenSilently();
       const changeResult = await changeOrderStatus(
         user.sub,
         token,
-        order_id,//14
-        status//done
+        order_id,
+        status
       );
       console.log("changeResult", changeResult);
       orderShow();
@@ -150,13 +150,13 @@ function Dashboard() {
           <AddProduct setResponseInfo={setResponseInfo} />
           <Tabs
             uploadImg={uploadImg}
-            pendingOrders={pendingOrders}
-            unpaidOrders={unpaidOrders}
-            sentOrders={sentOrders}
-            paidOrders={paidOrders}
-            allOrders={allOrders}
-            allDoneOrders={allDoneOrders}
-            allProducts={allProducts}
+            // pendingOrders={pendingOrders}
+            // unpaidOrders={unpaidOrders}
+            // sentOrders={sentOrders}
+            // paidOrders={paidOrders}
+            // allOrders={allOrders}
+            // allDoneOrders={allDoneOrders}
+            // allProducts={allProducts}
             changeStatus={changeStatus}
             adminData={adminData}
           />

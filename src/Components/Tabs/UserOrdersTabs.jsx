@@ -31,7 +31,6 @@ const [tabIndex, setTabIndex] =useState(0);
    
   
     function getOrdersByPage(ordersByPage){
-        console.log("funkciai meji log" , ordersByPage);
         setOrdersByPage(ordersByPage)
     }
 
