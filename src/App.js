@@ -20,11 +20,10 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/products" element={<Products />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
         </Routes>
         <Footer />
       </div>
-}
+    }
     </BrowserRouter>
   );
 }

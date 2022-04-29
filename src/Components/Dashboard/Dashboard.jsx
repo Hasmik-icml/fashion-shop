@@ -134,7 +134,7 @@ function Dashboard() {
   console.log("orderList", orderList);
 
   return (
-      <div className="dashboard ui container">
+      <div className="dashboard main ui container">
       {responseInfo.length > 0 && responseInfo === "something went wrong" ? (
         <Message negative onDismiss={handleDismiss} content={responseInfo} />
       ) : responseInfo.length > 0 && responseInfo !== "something went wrong" ? (
@@ -162,9 +162,9 @@ function Dashboard() {
           />
         </>
       ) : (
-        <>
+       
           <UserOrdersTabs orderList={orderList} />
-        </>
+       
       )}
     </div>
     

@@ -15,17 +15,17 @@ import "./footer.css"
 function Footer(){
     return (
         
-      <div className="footer">
-      <Segment inverted vertical style={{ padding: "5em 0em" }}>
-        <Container>
+      
+      <Segment inverted verical className='footer'>
+        {/* <Container> */}
           <Grid divided inverted stackable>
             <Grid.Row>
               <Grid.Column width="4">
-                <Header inverted as="h4" as={Link} to="/" content="Home" />    
+                <Header inverted  as={Link} to="/" content="Home" />    
               </Grid.Column>
 
               <Grid.Column width="4">
-                <Header inverted as="h4" as={Link} to="/Products" content="Products" />
+                <Header inverted  as={Link} to="/Products" content="Products" />
               </Grid.Column>
 
               <Grid.Column width="4">
@@ -40,9 +40,9 @@ function Footer(){
               
             </Grid.Row>
           </Grid>
-        </Container>
+        {/* </Container> */}
       </Segment>
-    </div>
+
     )
 }
 

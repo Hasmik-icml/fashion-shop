@@ -18,7 +18,6 @@ export async function getProducts() {
 //for user
 export async function getOrders(user_id, token) {
     try {
-        console.log(user_id);
         const response = await fetch(`${apiURL}order/user-order`,{
             
             method: "GET",
